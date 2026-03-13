@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STORM OF DESTRUCTION | HEAVY ROCK - HIGH SCHOOL CREW</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;700&display=swap');
+
+        :root {
+            --bg-dark: #020202;
+            --accent: #ffffff;
+            --electric-blue: #00eeff;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border-glass: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #ccc;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Efeito de Raios de Fundo */
+        .thunder-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 0%, #111 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(rgba(0,0,0,0.3), var(--bg-dark));
+        }
+
+        .logo-container {
+            max-width: 700px;
+            width: 85%;
+            margin-bottom: 30px;
+            animation: storm-entry 1.5s ease-out;
+        }
+
+        .logo-container img {
+            width: 100%;
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.1));
+        }
+
+        @keyframes storm-entry {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); filter: brightness(2); }
+            to { opacity: 1; transform: scale(1) translateY(0); filter: brightness(1); }
+        }
+
+        .motto {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--accent);
+            opacity: 0.7;
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: 10px;
+        }
+
+        section {
+            padding: 120px 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        h2 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            text-align: center;
+            color: #fff;
+            letter-spacing: 10px;
+            text-transform: uppercase;
+        }
+
+        .glass-box {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-glass);
+            padding: 50px;
+            border-radius: 2px;
+            line-height: 2;
+        }
+
+        .lineup-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .member-card {
+            background: linear-gradient(145deg, #0a0a0a, #111);
+            padding: 40px;
+            border-left: 1px solid var(--border-glass);
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member-card:hover {
+            border-left: 1px solid var(--electric-blue);
+            background: #151515;
+            transform: scale(1.02);
+        }
+
+        .member-card h3 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .instrument {
+            display: block;
+            color: var(--electric-blue);
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .description {
+            font-size: 0.95rem;
+            color: #999;
+        }
+
+        .arsenal-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .arsenal-item {
+            padding: 15px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-glass);
+            text-align: center;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .arsenal-item:hover {
+            background: var(--electric-blue);
+            color: #fff;
+            transform: translateY(-5px);
+        }
+
+        #gear-display {
+            margin-top: 40px;
+            display: none;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            align-items: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .gear-img {
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid var(--border-glass);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; } to { opacity: 1; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 80px 20px;
+            border-top: 1px solid var(--border-glass);
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            color: #444;
+        }
+
+        .highlight { color: #fff; font-weight: bold; }
+
+    </style>
+</head>
+<body>
+
+    <div class="thunder-bg"></div>
+
+    <header>
+        <div class="logo-container">
+            <img src="Image.jpg" alt="Storm of Destruction Logo">
+        </div>
+        <div class="motto">Even in the storm, the light still shines</div>
+    </header>
+
+    <section id="manifesto">
+        <h2>Nosso Grito</h2>
+        <div class="glass-box">
+            <p>A <span class="highlight">Storm of Destruction</span> não é só som. É uma tempestade que surge diretamente da garagem do Diogo para o mundo, criada por amigos de High School que se recusam a aceitar o mundo em silêncio. Nosso rock é agressivo, intenso e honesto.</p>
+            <p>Usamos o Heavy Rock como nossa linguagem para traduzir o caos, a dor e os conflitos que a gente vê. Mas nossa missão não é te deixar no chão. É mostrar que, mesmo quando a tempestade é total, a luz da redenção e da esperança tá lá. É som pra quem luta interna e externamente.</p>
+        </div>
+    </section>
+
+    <section id="band">
+        <h2>O Trio</h2>
+        <div class="lineup-grid">
+            <div class="member-card">
+                <span class="instrument">Voz & Base Atômica</span>
+                <h3>Daniel</h3>
+                <p class="description">A alma lírica. Daniel bota pra fora a intensidade emocional em cada letra, traduzindo solidão, guerra e recomeço. Com a Stratocaster, ele cria a base rítmica pesada que sustenta todo o nosso caos.</p>
+            </div>
+            <div class="member-card">
+                <span class="instrument">Lead Guitar & Caos Melódico</span>
+                <h3>Diogo</h3>
+                <p class="description">O arquiteto dos solos elétricos. Diogo alterna entre a Strato clássica e a agressividade pura da Flying V para rasgar o som da banda com técnica e atitude.</p>
+            </div>
+            <div class="member-card">
+                <span class="instrument">Bateria & Trovão Visceral</span>
+                <h3>Ícaro</h3>
+                <p class="description">O motor da destruição. Ícaro dita o ritmo brutal da nossa tempestade. Com batidas viscerais e intensas, ele garante que a mensagem da banda tenha o peso físico que o Heavy Rock precisa.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="studio">
+        <h2>The HQ Basement</h2>
+        <div class="glass-box">
+            <p>É aqui na garagem do Diogo que o som ganha vida. A gente transformou o espaço num bunker de criação com um arsenal pronto pra qualquer batalha sonora. Seleciona um item pra ver quem comanda:</p>
+            
+            <div class="arsenal-list">
+                <div class="arsenal-item" onclick="showGear('drums')">Bateria do Ícaro</div>
+                <div class="arsenal-item" onclick="showGear('flyingv')">Flying V do Diogo</div>
+                <div class="arsenal-item" onclick="showGear('strato')">Strato do Daniel</div>
+                <div class="arsenal-item" onclick="showGear('piano')">Piano / Teclas</div>
+                <div class="arsenal-item" onclick="showGear('gaita')">Gaita Profana</div>
+            </div>
+
+            <div id="gear-display">
+                <img id="gear-photo" src="" alt="Equipamento" class="gear-img">
+                <div>
+                    <h3 id="gear-title" style="color: #fff; font-family: 'Syncopate'; margin-bottom: 10px;"></h3>
+                    <p id="gear-user" style="color: var(--electric-blue); font-weight: bold; text-transform: uppercase; margin-bottom: 10px;"></p>
+                    <p id="gear-desc" class="description"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>STORM OF DESTRUCTION // EST. 2026</p>
+        <p style="margin-top: 10px;">HIGH SCHOOL ROCK CREW // SEM PIEDADE</p>
+    </footer>
+
+    <script>
+        const gearData = {
+            'drums': {
+                title: 'Bateria Trovão',
+                user: 'Operada por Ícaro',
+                desc: 'O motor rítmico. Aqui o Ícaro comanda o caos Visceral, botando força em cada batida pro Heavy Rock explodir.',
+                img: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?auto=format&fit=crop&w=400&q=80'
+            },
+            'flyingv': {
+                title: 'Flying V Diogo',
+                user: 'Operada por Diogo',
+                desc: 'A arma do caos melódico. O formato icônico da Flying V é o Diogo solando e mostrando a atitude crua da banda.',
+                img: 'Image_Gear.png' // Imagem exata da sua foto
+            },
+            'strato': {
+                title: 'Strato Daniel',
+                user: 'Operada por Daniel',
+                desc: 'A fundação densa do som. O Daniel usa a Strato clássica pra criar as camadas de guitarra base e timbres reflexivos que preenchem nosso rock.',
+                img: 'https://images.unsplash.com/photo-1564186763535-ebb21ef5278c?auto=format&fit=crop&w=400&q=80'
+            },
+            'piano': {
+                title: 'Piano HQ',
+                user: 'Melodias HQ',
+                desc: 'As teclas trazem as melodias mais profundas, criando o contraste total entre o peso das guitarras e a redenção das letras.',
+                img: 'https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=400&q=80'
+            },
+            'gaita': {
+                title: 'Gaita Profana',
+                user: 'Textura Crua',
+                desc: 'A gaita entra com uma textura sonora crua e emocional, reforçando nossa identidade Rock and Roll de High School.',
+                img: 'https://images.unsplash.com/photo-1502773860571-211a597d6e4b?auto=format&fit=crop&w=400&q=80'
+            }
+        };
+
+        function showGear(id) {
+            const display = document.getElementById('gear-display');
+            const data = gearData[id];
+
+            document.getElementById('gear-photo').src = data.img;
+            document.getElementById('gear-title').innerText = data.title;
+            document.getElementById('gear-user').innerText = data.user;
+            document.getElementById('gear-desc').innerText = data.desc;
+
+            display.style.display = 'grid';
+            
+            // Scroll suave pro painel de detalhes
+            display.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>
