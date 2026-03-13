@@ -16,7 +16,6 @@
             --storm-intensity: 0.1;
         }
 
-        /* STORM MODE ACTIVATED */
         body.storm-mode {
             --electric-blue: #00ffaa;
             --border-glass: rgba(0, 255, 170, 0.2);
@@ -26,77 +25,72 @@
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         body { background-color: var(--bg-dark); color: #ccc; font-family: 'Inter', sans-serif; overflow-x: hidden; transition: 0.5s ease; }
 
+        /* RELÂMPAGO (FLASH) */
+        #lightning-flash {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: white; z-index: 9999; pointer-events: none; opacity: 0;
+        }
+        @keyframes flash-anim {
+            0% { opacity: 0; } 10% { opacity: 0.8; } 20% { opacity: 0; } 25% { opacity: 0.5; } 30% { opacity: 0; }
+        }
+
+        /* ACHIEVEMENTS POPUP */
+        #achievement-toast {
+            position: fixed; top: 20px; right: -300px; width: 250px;
+            background: rgba(0, 0, 0, 0.9); border-left: 4px solid var(--electric-blue);
+            padding: 15px; color: white; z-index: 10000; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-family: 'Syncopate'; font-size: 0.55rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        #achievement-toast.show { right: 20px; }
+
+        /* CANVAS CHUVA */
+        #storm-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; opacity: 0; transition: opacity 1s; }
+        body.storm-mode #storm-canvas { opacity: 1; }
+
         /* NAVBAR */
         nav {
-            position: fixed;
-            top: 0; width: 100%; height: 70px;
-            background: rgba(2, 2, 2, 0.95);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--border-glass);
-            display: flex; justify-content: center; align-items: center; z-index: 1000;
+            position: fixed; top: 0; width: 100%; height: 70px;
+            background: rgba(2, 2, 2, 0.95); backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-glass); display: flex; justify-content: center; align-items: center; z-index: 1000;
         }
         nav ul { display: flex; list-style: none; gap: 20px; flex-wrap: wrap; justify-content: center; align-items: center; }
         nav a { text-decoration: none; color: #888; font-family: 'Syncopate', sans-serif; font-size: 0.55rem; letter-spacing: 2px; transition: 0.3s; }
         nav a:hover { color: var(--electric-blue); text-shadow: 0 0 10px var(--electric-blue); }
 
-        /* STORM MODE SWITCH */
         .mode-switch {
-            background: transparent;
-            border: 1px solid var(--electric-blue);
-            color: var(--electric-blue);
-            font-family: 'Syncopate';
-            font-size: 0.5rem;
-            padding: 5px 10px;
-            cursor: pointer;
-            margin-left: 20px;
-            transition: 0.3s;
+            background: transparent; border: 1px solid var(--electric-blue); color: var(--electric-blue);
+            font-family: 'Syncopate'; font-size: 0.5rem; padding: 5px 10px; cursor: pointer; margin-left: 20px; transition: 0.3s;
         }
         .mode-switch:hover { background: var(--electric-blue); color: #000; }
 
-        /* HEADER & LOGO */
-        .thunder-bg { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: radial-gradient(circle at 50% 0%, #111 0%, transparent 70%); 
-            z-index: -1; opacity: var(--storm-intensity); transition: 0.5s;
-        }
+        /* HEADER */
+        .thunder-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 0%, #111 0%, transparent 70%); z-index: -1; opacity: var(--storm-intensity); transition: 0.5s; }
         header { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        
         .logo-container { max-width: 600px; width: 85%; margin-bottom: 20px; position: relative; overflow: hidden; cursor: pointer; }
         .logo-container img { width: 100%; filter: drop-shadow(0 0 20px rgba(255,255,255,0.1)); transition: 0.2s; }
         .logo-container:hover img { animation: glitch-img 0.3s cubic-bezier(.25,.46,.45,.94) both infinite; filter: drop-shadow(0 0 30px var(--electric-blue)); }
 
-        @keyframes glitch-img {
-            0% { transform: translate(0); }
-            20% { transform: translate(-2px, 2px); }
-            40% { transform: translate(-2px, -2px); }
-            60% { transform: translate(2px, 2px); }
-            80% { transform: translate(2px, -2px); }
-            100% { transform: translate(0); }
-        }
-        
+        @keyframes glitch-img { 0% { transform: translate(0); } 20% { transform: translate(-2px, 2px); } 40% { transform: translate(-2px, -2px); } 60% { transform: translate(2px, 2px); } 80% { transform: translate(2px, -2px); } 100% { transform: translate(0); } }
         .motto { font-family: 'Syncopate', sans-serif; font-size: 0.8rem; letter-spacing: 6px; text-transform: uppercase; color: var(--accent); opacity: 0.7; margin-top: 20px; animation: flicker 3s infinite; }
         @keyframes flicker { 0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 0.5; } 20%, 24%, 55% { opacity: 1; color: var(--electric-blue); } }
         
         /* SECTIONS */
-        section { padding: 80px 20px; max-width: 1100px; margin: auto; }
+        section { padding: 80px 20px; max-width: 1100px; margin: auto; position: relative; z-index: 1; }
         h2 { font-family: 'Syncopate', sans-serif; font-size: 1.4rem; margin-bottom: 40px; text-align: center; color: #fff; letter-spacing: 8px; text-transform: uppercase; border-bottom: 1px solid var(--border-glass); padding-bottom: 20px; }
         .glass-box { background: var(--glass); backdrop-filter: blur(10px); border: 1px solid var(--border-glass); padding: 40px; line-height: 1.8; margin-bottom: 30px; border-radius: 4px; }
         
-        /* NOISE METER */
         .noise-meter-container { margin-top: 20px; }
         .meter-label { display: flex; justify-content: space-between; font-family: 'Syncopate'; font-size: 0.6rem; color: var(--electric-blue); margin-bottom: 8px; }
         .meter-bar { width: 100%; height: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); border-radius: 20px; overflow: hidden; }
         .meter-fill { width: 20%; height: 100%; background: linear-gradient(90deg, var(--electric-blue), #fff); box-shadow: 0 0 15px var(--electric-blue); animation: pulse-bar 2s infinite; }
         @keyframes pulse-bar { 0% { opacity: 0.7; } 50% { opacity: 1; } 100% { opacity: 0.7; } }
 
-        /* THE CREW */
         .crew-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
         .crew-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); padding: 30px; text-align: center; transition: 0.3s; }
         .crew-card:hover { border-color: var(--electric-blue); background: rgba(0, 238, 255, 0.05); }
         .crew-role { font-family: 'Syncopate'; font-size: 0.6rem; color: var(--electric-blue); display: block; margin-bottom: 10px; letter-spacing: 2px; }
         .crew-name { font-family: 'Syncopate'; font-size: 1.1rem; color: #fff; margin-bottom: 15px; display: block; }
 
-        /* TRACKS & GEAR */
         .track { display: flex; justify-content: space-between; padding: 15px; border-bottom: 1px solid var(--border-glass); }
         .track-name { font-family: 'Syncopate', sans-serif; font-size: 0.75rem; color: #fff; }
         .arsenal-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
@@ -105,41 +99,17 @@
         #gear-display { margin-top: 30px; display: none; grid-template-columns: 1fr 1.5fr; gap: 30px; align-items: center; animation: fadeIn 0.5s; }
         .gear-img { width: 100%; border: 1px solid var(--border-glass); }
 
-        /* CONTACT FORM */
         .contact-form { display: grid; gap: 15px; max-width: 600px; margin: 0 auto; }
-        .contact-form input, .contact-form textarea {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--border-glass);
-            padding: 15px; color: #fff; font-family: 'Inter', sans-serif;
-            outline: none; border-radius: 4px;
-        }
+        .contact-form input, .contact-form textarea { background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); padding: 15px; color: #fff; font-family: 'Inter', sans-serif; outline: none; border-radius: 4px; }
         .contact-form input:focus, .contact-form textarea:focus { border-color: var(--electric-blue); }
         .insta-btn { display: inline-block; margin-top: 20px; padding: 15px 30px; border: 1px solid var(--electric-blue); color: var(--electric-blue); text-decoration: none; font-family: 'Syncopate', sans-serif; font-size: 0.7rem; transition: 0.3s; text-align: center; background: transparent; cursor: pointer; }
         .insta-btn:hover { background: var(--electric-blue); color: #000; box-shadow: 0 0 20px rgba(0, 238, 255, 0.4); }
 
-        /* VISITOR COUNTER STYLING */
-        .visitor-counter {
-            margin-top: 20px; font-family: 'Courier New', monospace; font-size: 0.6rem; color: #444; letter-spacing: 1px;
-        }
+        .visitor-counter { margin-top: 20px; font-family: 'Courier New', monospace; font-size: 0.6rem; color: #444; letter-spacing: 1px; }
         .visitor-counter span { color: var(--electric-blue); font-weight: bold; }
 
-        /* TERMINAL UI */
-        #terminal-launcher {
-            position: fixed; bottom: 20px; right: 20px;
-            width: 50px; height: 50px; background: var(--bg-dark);
-            border: 1px solid var(--electric-blue); border-radius: 50%;
-            color: var(--electric-blue); display: flex; align-items: center;
-            justify-content: center; cursor: pointer; z-index: 2000;
-            box-shadow: 0 0 15px rgba(0, 238, 255, 0.3); font-family: monospace; font-weight: bold;
-        }
-        #bunker-terminal {
-            position: fixed; bottom: 80px; right: 20px;
-            width: 320px; height: 400px; background: rgba(2, 2, 2, 0.98);
-            border: 1px solid var(--electric-blue); z-index: 2000;
-            display: none; flex-direction: column; padding: 15px;
-            font-family: 'Courier New', Courier, monospace; font-size: 0.8rem;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 1);
-        }
+        #terminal-launcher { position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background: var(--bg-dark); border: 1px solid var(--electric-blue); border-radius: 50%; color: var(--electric-blue); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; box-shadow: 0 0 15px rgba(0, 238, 255, 0.3); font-family: monospace; font-weight: bold; }
+        #bunker-terminal { position: fixed; bottom: 80px; right: 20px; width: 320px; height: 400px; background: rgba(2, 2, 2, 0.98); border: 1px solid var(--electric-blue); z-index: 2000; display: none; flex-direction: column; padding: 15px; font-family: 'Courier New', Courier, monospace; font-size: 0.8rem; box-shadow: 0 0 30px rgba(0, 0, 0, 1); }
         #terminal-output { flex-grow: 1; overflow-y: auto; color: var(--electric-blue); margin-bottom: 10px; }
         #terminal-input { background: transparent; border: none; color: #fff; outline: none; width: 100%; }
 
@@ -148,11 +118,19 @@
     </style>
 </head>
 <body>
+    <div id="lightning-flash"></div>
+    <div id="achievement-toast">
+        <span style="color: var(--electric-blue);">[CONQUISTA DESBLOQUEADA]</span><br>
+        <p id="achievement-name" style="margin-top:5px;"></p>
+    </div>
+
     <div class="thunder-bg"></div>
+    <canvas id="storm-canvas"></canvas>
 
     <nav>
         <ul>
             <li><a href="#about">ORIGIN</a></li>
+            <li><a href="#history">COMO SURGIU</a></li>
             <li><a href="#crew">THE CREW</a></li>
             <li><a href="#setlist">SETLIST</a></li>
             <li><a href="#studio">EQUIPOS</a></li>
@@ -170,7 +148,7 @@
     <section id="about">
         <h2>The Origin</h2>
         <div class="glass-box">
-            <p>A <strong>Storm of Destruction</strong> nasceu da urgência de trazer o peso de volta às garagens. Baseada em Campinas, a banda utiliza o "Bunker do Diogo" como laboratório para desconstruir o Heavy Rock.</p>
+            <p>A <strong>Storm of Destruction</strong> nasceu da urgência de trazer o peso de volta às garagens. Situada em Campinas, a banda utiliza o "Bunker do Diogo" como laboratório para desconstruir o Heavy Metal.</p>
             <div class="noise-meter-container">
                 <div class="meter-label"><span>PROGRESSO: 1ª MÚSICA AUTORAL</span><span id="meter-text">20% COMPLETO</span></div>
                 <div class="meter-bar"><div class="meter-fill" id="meter-fill"></div></div>
@@ -178,24 +156,19 @@
         </div>
     </section>
 
+    <section id="history">
+        <h2>Como Surgiu</h2>
+        <div class="glass-box">
+            <p>A Storm of Destruction não começou em um estúdio profissional, mas sim nos corredores da escola, entre conversas sobre riffs de guitarra e o desejo de tocar algo que realmente tivesse peso. O que uniu Daniel, Diogo e eu foi justamente essa afinidade rara: três amigos que não se satisfaziam com o comum e queriam trazer de volta a energia crua do Heavy Metal. Um dia, o que era apenas um "e se?" virou realidade quando decidimos plugar os instrumentos e ver o que acontecia. Entre erros e acertos no Bunker, percebemos que a nossa química ia muito além da amizade; havia uma tempestade sonora ali querendo sair. Foi assim que nasceu a Storm, não apenas como uma banda, mas como o resultado de três caras que decidiram transformar o barulho da garagem em algo que pudesse ser sentido no peito por qualquer um que parasse para ouvir.</p>
+        </div>
+    </section>
+
     <section id="crew">
         <h2>The Crew</h2>
         <div class="crew-grid">
-            <div class="crew-card">
-                <span class="crew-role">VOZ & GUITARRA BASE</span>
-                <span class="crew-name">DANIEL</span>
-                <p>Vocais viscerais e base sólida.</p>
-            </div>
-            <div class="crew-card">
-                <span class="crew-role">GUITARRA SOLO</span>
-                <span class="crew-name">DIOGO</span>
-                <p>Mestre dos riffs e distorções cortantes.</p>
-            </div>
-            <div class="crew-card">
-                <span class="crew-role">BATERIA</span>
-                <span class="crew-name">ÍCARO</span>
-                <p>O motor implacável da destruição.</p>
-            </div>
+            <div class="crew-card"><span class="crew-role">VOZ & GUITARRA BASE</span><span class="crew-name">DANIEL</span><p>Vocais viscerais e base sólida.</p></div>
+            <div class="crew-card"><span class="crew-role">GUITARRA SOLO</span><span class="crew-name">DIOGO</span><p>Mestre dos riffs e distorções cortantes.</p></div>
+            <div class="crew-card"><span class="crew-role">BATERIA</span><span class="crew-name">ÍCARO</span><p>O motor implacável da destruição.</p></div>
         </div>
     </section>
 
@@ -205,7 +178,7 @@
             <div class="track"><span class="track-name">01. Smells Like Teen Spirit</span><span style="color:var(--electric-blue); font-size:0.7rem;">NIRVANA</span></div>
             <div class="track"><span class="track-name">02. Notion (Rock Version)</span><span style="color:var(--electric-blue); font-size:0.7rem;">THE RARE OCCASIONS</span></div>
             <div class="track"><span class="track-name">03. 333</span><span style="color:var(--electric-blue); font-size:0.7rem;">MATUÊ (HEAVY)</span></div>
-            <div class="track"><span class="track-name">04. Enter Sandman</span><span style="color:var(--electric-blue); font-size:0.7rem;">METALLICA</span></div>
+             <div class="track"><span class="track-name">04. Enter Sandman</span><span style="color:var(--electric-blue); font-size:0.7rem;">Metallica</span></div>
         </div>
     </section>
 
@@ -266,7 +239,43 @@
     </div>
 
     <script>
-    // Gerenciamento de Equipamentos
+    // Configurações de Áudio e Chuva
+    const thunderSound = new Audio('https://www.soundjay.com/nature/sounds/thunder-strike-1.mp3');
+    const canvas = document.getElementById('storm-canvas');
+    const ctx = canvas.getContext('2d');
+    let drops = [];
+    let achievements = { storm: false, terminal: false, gear: false };
+
+    function unlockAchievement(id, name) {
+        if (achievements[id]) return;
+        achievements[id] = true;
+        const toast = document.getElementById('achievement-toast');
+        document.getElementById('achievement-name').innerText = name;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 4000);
+    }
+
+    function initRain() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        drops = [];
+        for (let i = 0; i < 100; i++) {
+            drops.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, len: Math.random() * 20 + 10, speed: Math.random() * 10 + 5 });
+        }
+    }
+
+    function drawRain() {
+        if (!document.body.classList.contains('storm-mode')) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = 'rgba(0, 255, 170, 0.3)';
+        ctx.lineWidth = 1;
+        drops.forEach(d => {
+            ctx.beginPath(); ctx.moveTo(d.x, d.y); ctx.lineTo(d.x, d.y + d.len); ctx.stroke();
+            d.y += d.speed; if (d.y > canvas.height) d.y = -20;
+        });
+        requestAnimationFrame(drawRain);
+    }
+
     const gearData = {
         'drums': { title: 'BATERIA TROVÃO', owner: 'ÍCARO', desc: 'Motor implacável da destruição.', img: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=500' },
         'flyingv': { title: 'JACKSON KING V JS32', owner: 'DIOGO', desc: 'Arma escolhida para solos cortantes.', img: 'flyingv.png' },
@@ -274,6 +283,7 @@
     };
 
     function showGear(id) {
+        unlockAchievement('gear', 'AUDITOR DE EQUIPAMENTO 🎸');
         const display = document.getElementById('gear-display');
         const data = gearData[id];
         document.getElementById('gear-photo').src = data.img;
@@ -283,25 +293,31 @@
         display.style.display = 'grid';
     }
 
-    // STORM MODE (DARK MODE)
     function toggleStormMode() {
-        document.body.classList.toggle('storm-mode');
+        const isActive = document.body.classList.toggle('storm-mode');
         const btn = document.querySelector('.mode-switch');
-        const isActive = document.body.classList.contains('storm-mode');
         btn.innerText = isActive ? "STORM_MODE: ON" : "STORM_MODE: OFF";
+        
+        if (isActive) {
+            alert("STORM MODE ATIVADO ⛈️⚡");
+            unlockAchievement('storm', 'SOBREVIVENTE DA TEMPESTADE ⛈️');
+            
+            // Relâmpago
+            const flash = document.getElementById('lightning-flash');
+            flash.style.animation = 'flash-anim 0.4s ease-out';
+            setTimeout(() => flash.style.animation = '', 500);
+            
+            thunderSound.play();
+            initRain();
+            drawRain();
+        }
     }
 
-    // CONTADOR DE ACESSOS (SIMULADO)
     let count = 427;
-    setInterval(() => {
-        if(Math.random() > 0.8) {
-            count++;
-            document.getElementById('count').innerText = count.toString().padStart(6, '0');
-        }
-    }, 3000);
+    setInterval(() => { if(Math.random() > 0.8) { count++; document.getElementById('count').innerText = count.toString().padStart(6, '0'); } }, 3000);
 
-    // TERMINAL
     function toggleTerminal() {
+        unlockAchievement('terminal', 'HACKER DO BUNKER 💻');
         const t = document.getElementById('bunker-terminal');
         const input = document.getElementById('terminal-input');
         t.style.display = (t.style.display === 'flex') ? 'none' : 'flex';
@@ -314,18 +330,17 @@
             const output = document.getElementById('terminal-output');
             const cmd = input.value.toLowerCase().trim();
             let response = "";
-
             if (cmd === 'help') response = "status, members, location, storm-on, clear";
             else if (cmd === 'status') response = "MÚSICA: 20% | HUMIDITY: 85% | NOISE: HIGH";
             else if (cmd === 'storm-on') { toggleStormMode(); response = "STORM_MODE_OVERRIDE_SUCCESS"; }
             else if (cmd === 'clear') { output.innerHTML = ""; input.value = ""; return; }
             else response = `Comando '${cmd}' inválido.`;
-
             output.innerHTML += `<div><span style="color:#fff">> ${cmd}</span></div><div>${response}</div>`;
             output.scrollTop = output.scrollHeight;
             input.value = "";
         }
     }
+    window.onresize = initRain;
     </script>
 </body>
 </html>
