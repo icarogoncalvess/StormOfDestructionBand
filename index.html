@@ -33,8 +33,19 @@
 
         .thunder-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 0%, #111 0%, transparent 70%); z-index: -1; }
         header { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .logo-container { max-width: 600px; width: 85%; }
-        .logo-container img { width: 100%; filter: drop-shadow(0 0 20px rgba(255,255,255,0.1)); }
+        
+        .logo-container { max-width: 600px; width: 85%; margin-bottom: 20px; position: relative; overflow: hidden; cursor: pointer; }
+        .logo-container img { width: 100%; filter: drop-shadow(0 0 20px rgba(255,255,255,0.1)); transition: 0.2s; }
+        .logo-container:hover img { animation: glitch-img 0.3s cubic-bezier(.25,.46,.45,.94) both infinite; filter: drop-shadow(0 0 30px var(--electric-blue)); }
+
+        @keyframes glitch-img {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
         
         .motto { font-family: 'Syncopate', sans-serif; font-size: 0.8rem; letter-spacing: 6px; text-transform: uppercase; color: var(--accent); opacity: 0.7; margin-top: 20px; animation: flicker 3s infinite; }
         @keyframes flicker { 0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 0.5; } 20%, 24%, 55% { opacity: 1; color: var(--electric-blue); } }
@@ -44,34 +55,37 @@
         
         .glass-box { background: var(--glass); backdrop-filter: blur(10px); border: 1px solid var(--border-glass); padding: 40px; line-height: 1.8; margin-bottom: 30px; border-radius: 4px; }
         
-        /* NOVO: GRID DE CONTEÚDO (JOURNALS) */
-        .journal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .journal-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); padding: 25px; }
-        .journal-date { color: var(--electric-blue); font-size: 0.7rem; font-family: 'Syncopate'; margin-bottom: 10px; display: block; }
-        .journal-card h3 { color: #fff; margin-bottom: 10px; font-size: 1.1rem; }
+        /* NOISE METER */
+        .noise-meter-container { margin-top: 20px; }
+        .meter-label { display: flex; justify-content: space-between; font-family: 'Syncopate'; font-size: 0.6rem; color: var(--electric-blue); margin-bottom: 8px; }
+        .meter-bar { width: 100%; height: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); border-radius: 20px; overflow: hidden; }
+        .meter-fill { width: 20%; height: 100%; background: linear-gradient(90deg, var(--electric-blue), #fff); box-shadow: 0 0 15px var(--electric-blue); animation: pulse-bar 2s infinite; }
+        @keyframes pulse-bar { 0% { opacity: 0.7; } 50% { opacity: 1; } 100% { opacity: 0.7; } }
 
-        /* NOVO: FAQ */
-        .faq-item { margin-bottom: 20px; border-bottom: 1px solid var(--border-glass); padding-bottom: 10px; }
-        .faq-item h4 { color: var(--electric-blue); font-family: 'Syncopate'; font-size: 0.7rem; margin-bottom: 5px; }
-
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; text-align: center; margin-top: 30px; }
-        .stat-item { border: 1px solid var(--border-glass); padding: 20px; }
-        .stat-num { display: block; font-family: 'Syncopate', sans-serif; font-size: 1.5rem; color: #fff; }
+        /* THE CREW SECTION */
+        .crew-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .crew-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); padding: 30px; text-align: center; transition: 0.3s; }
+        .crew-card:hover { border-color: var(--electric-blue); background: rgba(0, 238, 255, 0.05); }
+        .crew-role { font-family: 'Syncopate'; font-size: 0.6rem; color: var(--electric-blue); display: block; margin-bottom: 10px; letter-spacing: 2px; }
+        .crew-name { font-family: 'Syncopate'; font-size: 1.1rem; color: #fff; margin-bottom: 15px; display: block; }
+        .crew-bio { font-size: 0.85rem; line-height: 1.6; color: #aaa; }
 
         .track { display: flex; justify-content: space-between; padding: 15px; border-bottom: 1px solid var(--border-glass); }
         .track-name { font-family: 'Syncopate', sans-serif; font-size: 0.75rem; color: #fff; }
 
-        .gig-card { background: #0a0a0a; padding: 25px; border-left: 4px solid var(--electric-blue); display: flex; justify-content: space-between; align-items: center; }
-
         .arsenal-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
-        .arsenal-item { padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); text-align: center; font-size: 0.7rem; cursor: pointer; }
-        .arsenal-item:hover { background: var(--electric-blue); color: #000; }
+        .arsenal-item { padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); text-align: center; font-size: 0.7rem; cursor: pointer; transition: 0.2s; font-family: 'Syncopate'; }
+        .arsenal-item:hover { background: var(--electric-blue); color: #000; transform: skewX(-10deg); }
         
         #gear-display { margin-top: 30px; display: none; grid-template-columns: 1fr 1.5fr; gap: 30px; align-items: center; animation: fadeIn 0.5s; }
         .gear-img { width: 100%; border: 1px solid var(--border-glass); }
 
+        .social-box { text-align: center; padding: 40px; border: 1px dashed var(--border-glass); }
+        .insta-btn { display: inline-block; margin-top: 20px; padding: 15px 30px; border: 1px solid var(--electric-blue); color: var(--electric-blue); text-decoration: none; font-family: 'Syncopate', sans-serif; font-size: 0.7rem; transition: 0.3s; }
+        .insta-btn:hover { background: var(--electric-blue); color: #000; box-shadow: 0 0 20px rgba(0, 238, 255, 0.4); }
+
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        footer { text-align: center; padding: 60px 20px; font-size: 0.6rem; color: #444; letter-spacing: 2px; border-top: 1px solid var(--border-glass); }
+        footer { text-align: center; padding: 60px 20px; font-size: 0.6rem; color: #444; letter-spacing: 2px; border-top: 1px solid var(--border-glass); line-height: 2; }
     </style>
 </head>
 <body>
@@ -79,11 +93,11 @@
 
     <nav>
         <ul>
-            <li><a href="#about">THE ORIGIN</a></li>
-            <li><a href="#journals">JOURNALS</a></li>
+            <li><a href="#about">ORIGIN</a></li>
+            <li><a href="#crew">THE CREW</a></li>
             <li><a href="#setlist">SETLIST</a></li>
             <li><a href="#studio">EQUIPOS</a></li>
-            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#social">REDES</a></li>
         </ul>
     </nav>
     
@@ -95,27 +109,31 @@
     <section id="about">
         <h2>The Origin</h2>
         <div class="glass-box">
-            <p>A <strong>Storm of Destruction</strong> é o resultado da fusão entre a técnica de garagem e a urgência de expressão. Baseada em Campinas, a banda utiliza o "Bunker do Diogo" como laboratório sonoro para desconstruir o Heavy Rock tradicional e injetar doses de realidade urbana.</p>
-            <div class="stats-grid">
-                <div class="stat-item"><span class="stat-num">03</span><span style="font-size: 0.6rem;">VOZES</span></div>
-                <div class="stat-item"><span class="stat-num">01</span><span style="font-size: 0.6rem;">BUNKER</span></div>
-                <div class="stat-item"><span class="stat-num">∞</span><span style="font-size: 0.6rem;">RUIDO</span></div>
+            <p>A <strong>Storm of Destruction</strong> nasceu da urgência de trazer o peso de volta às garagens. Baseada em Campinas, a banda utiliza o "Bunker do Diogo" como laboratório para desconstruir o Heavy Rock e injetar doses de realidade urbana.</p>
+            <div class="noise-meter-container">
+                <div class="meter-label"><span>PROGRESSO: 1ª MÚSICA AUTORAL</span><span>20% COMPLETO</span></div>
+                <div class="meter-bar"><div class="meter-fill"></div></div>
             </div>
         </div>
     </section>
 
-    <section id="journals">
-        <h2>Bunker Journals</h2>
-        <div class="journal-grid">
-            <div class="journal-card">
-                <span class="journal-date">12 MAR 2026</span>
-                <h3>Distorção é a Chave</h3>
-                <p>Hoje Daniel e Diogo testaram novos pedais para o cover de 333. A ideia é transformar o beat do Matuê em um paredão de som visceral.</p>
+    <section id="crew">
+        <h2>The Crew</h2>
+        <div class="crew-grid">
+            <div class="crew-card">
+                <span class="crew-role">VOZ & GUITARRA BASE</span>
+                <span class="crew-name">DANIEL</span>
+                <p class="crew-bio">A alma lírica da banda. Daniel combina vocais viscerais com a base sólida da Stratocaster, trazendo a identidade melódica para o caos.</p>
             </div>
-            <div class="journal-card">
-                <span class="journal-date">10 MAR 2026</span>
-                <h3>O Motor do Ícaro</h3>
-                <p>Ensaiamos a transição de Notion. A bateria precisa guiar o caos para que a melodia não se perca no peso.</p>
+            <div class="crew-card">
+                <span class="crew-role">GUITARRA SOLO</span>
+                <span class="crew-name">DIOGO</span>
+                <p class="crew-bio">O mestre dos riffs no Bunker. Com sua Flying V, Diogo é responsável pelas distorções cortantes e pelos solos que definem o peso da Storm.</p>
+            </div>
+            <div class="crew-card">
+                <span class="crew-role">BATERIA</span>
+                <span class="crew-name">ÍCARO</span>
+                <p class="crew-bio">O motor implacável. Ícaro dita o ritmo da destruição, garantindo que cada batida seja um trovão no peito de quem ouve.</p>
             </div>
         </div>
     </section>
@@ -141,63 +159,42 @@
             <div id="gear-display">
                 <img id="gear-photo" src="" alt="Equipamento" class="gear-img">
                 <div>
-                    <h3 id="gear-title" style="color: #fff; font-family: 'Syncopate'; margin-bottom: 10px;"></h3>
+                    <h3 id="gear-title" style="color: #fff; font-family: 'Syncopate'; margin-bottom: 5px;"></h3>
+                    <span id="gear-owner" style="color: var(--electric-blue); font-family: 'Syncopate'; font-size: 0.6rem; display: block; margin-bottom: 10px;"></span>
                     <p id="gear-desc"></p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="faq">
-        <h2>F.A.Q.</h2>
-        <div class="glass-box">
-            <div class="faq-item">
-                <h4>Por que "Storm of Destruction"?</h4>
-                <p>Porque nossa música é sobre o que sobra depois da tempestade: a reconstrução.</p>
-            </div>
-            <div class="faq-item">
-                <h4>Onde vocês ensaiam?</h4>
-                <p>No Bunker, um espaço isolado onde o volume não tem limites.</p>
-            </div>
-            <div class="faq-item">
-                <h4>Qual a formação?</h4>
-                <p>Daniel (Voz/Strato), Diogo (Solo/Flying V) e Ícaro (Bateria).</p>
-            </div>
+    <section id="social">
+        <h2>Conexão Visceral</h2>
+        <div class="glass-box social-box">
+            <a href="https://www.instagram.com/stormofdestructionband" target="_blank" class="insta-btn">FOLLOW US @stormofdestructionband</a>
         </div>
     </section>
 
-    <footer>STORM OF DESTRUCTION // 2026 // CAMPINAS - SP</footer>
+    <footer>
+        STORM OF DESTRUCTION // 2026 // CAMPINAS - SP<br>
+        <span style="opacity: 0.5; font-size: 0.5rem;">DESENVOLVIDO POR ÍCARO GONÇALVES</span>
+    </footer>
 
     <script>
-     const gearData = {
-    'drums': { 
-        title: 'BATERIA TROVÃO', 
-        user: 'Ícaro', 
-        desc: 'O coração pulsante da Storm. Com viradas explosivas e um bumbo que treme o chão, Ícaro dita o ritmo implacável da banda.', 
-        img: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=500' 
-    },
-    'flyingv': { 
-        title: 'JACKSON KING V JS32', 
-        user: 'Diogo', 
-        desc: 'Distorção e atitude pura. Diogo traz o peso do metal com solos cortantes e a agressividade visual clássica das Flying V.', 
-        img: 'flyingv.png'
-    },
-    'strato': { 
-        title: 'STRATOCASTER', 
-        user: 'Daniel', 
-        desc: 'A base sólida dos nossos riffs. Daniel combina versatilidade e clareza, garantindo o brilho e a textura que definem nossa sonoridade.', 
-        img: 'strato.png' 
-    }
-};
+    const gearData = {
+        'drums': { title: 'BATERIA TROVÃO', owner: 'ÍCARO', desc: 'O coração pulsante da Storm. Ícaro dita o ritmo implacável que não deixa ninguém parado.', img: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=500' },
+        'flyingv': { title: 'JACKSON KING V JS32', owner: 'DIOGO', desc: 'Distorção e atitude pura. A arma escolhida por Diogo para os solos mais cortantes da banda.', img: 'flyingv.png' },
+        'strato': { title: 'STRATOCASTER', owner: 'DANIEL', desc: 'A versatilidade das cordas. Daniel utiliza a Strato para transitar entre timbres limpos e o peso do rock.', img: 'strato.png' }
+    };
 
-        function showGear(id) {
-            const display = document.getElementById('gear-display');
-            const data = gearData[id];
-            document.getElementById('gear-photo').src = data.img;
-            document.getElementById('gear-title').innerText = data.title;
-            document.getElementById('gear-desc').innerText = data.desc;
-            display.style.display = 'grid';
-        }
+    function showGear(id) {
+        const display = document.getElementById('gear-display');
+        const data = gearData[id];
+        document.getElementById('gear-photo').src = data.img;
+        document.getElementById('gear-title').innerText = data.title;
+        document.getElementById('gear-owner').innerText = `OPERADO POR: ${data.owner}`;
+        document.getElementById('gear-desc').innerText = data.desc;
+        display.style.display = 'grid';
+    }
     </script>
 </body>
 </html>
