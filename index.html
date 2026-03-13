@@ -13,10 +13,18 @@
             --electric-blue: #00eeff; 
             --glass: rgba(255, 255, 255, 0.03); 
             --border-glass: rgba(255, 255, 255, 0.1); 
+            --storm-intensity: 0.1;
+        }
+
+        /* STORM MODE ACTIVATED */
+        body.storm-mode {
+            --electric-blue: #00ffaa;
+            --border-glass: rgba(0, 255, 170, 0.2);
+            --storm-intensity: 0.4;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body { background-color: var(--bg-dark); color: #ccc; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        body { background-color: var(--bg-dark); color: #ccc; font-family: 'Inter', sans-serif; overflow-x: hidden; transition: 0.5s ease; }
 
         /* NAVBAR */
         nav {
@@ -27,12 +35,30 @@
             border-bottom: 1px solid var(--border-glass);
             display: flex; justify-content: center; align-items: center; z-index: 1000;
         }
-        nav ul { display: flex; list-style: none; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        nav ul { display: flex; list-style: none; gap: 20px; flex-wrap: wrap; justify-content: center; align-items: center; }
         nav a { text-decoration: none; color: #888; font-family: 'Syncopate', sans-serif; font-size: 0.55rem; letter-spacing: 2px; transition: 0.3s; }
         nav a:hover { color: var(--electric-blue); text-shadow: 0 0 10px var(--electric-blue); }
 
+        /* STORM MODE SWITCH */
+        .mode-switch {
+            background: transparent;
+            border: 1px solid var(--electric-blue);
+            color: var(--electric-blue);
+            font-family: 'Syncopate';
+            font-size: 0.5rem;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-left: 20px;
+            transition: 0.3s;
+        }
+        .mode-switch:hover { background: var(--electric-blue); color: #000; }
+
         /* HEADER & LOGO */
-        .thunder-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 0%, #111 0%, transparent 70%); z-index: -1; }
+        .thunder-bg { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: radial-gradient(circle at 50% 0%, #111 0%, transparent 70%); 
+            z-index: -1; opacity: var(--storm-intensity); transition: 0.5s;
+        }
         header { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         
         .logo-container { max-width: 600px; width: 85%; margin-bottom: 20px; position: relative; overflow: hidden; cursor: pointer; }
@@ -69,9 +95,8 @@
         .crew-card:hover { border-color: var(--electric-blue); background: rgba(0, 238, 255, 0.05); }
         .crew-role { font-family: 'Syncopate'; font-size: 0.6rem; color: var(--electric-blue); display: block; margin-bottom: 10px; letter-spacing: 2px; }
         .crew-name { font-family: 'Syncopate'; font-size: 1.1rem; color: #fff; margin-bottom: 15px; display: block; }
-        .crew-bio { font-size: 0.85rem; line-height: 1.6; color: #aaa; }
 
-        /* SETLIST & ARSENAL */
+        /* TRACKS & GEAR */
         .track { display: flex; justify-content: space-between; padding: 15px; border-bottom: 1px solid var(--border-glass); }
         .track-name { font-family: 'Syncopate', sans-serif; font-size: 0.75rem; color: #fff; }
         .arsenal-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
@@ -85,15 +110,18 @@
         .contact-form input, .contact-form textarea {
             background: rgba(255,255,255,0.05);
             border: 1px solid var(--border-glass);
-            padding: 15px;
-            color: #fff;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-            border-radius: 4px;
+            padding: 15px; color: #fff; font-family: 'Inter', sans-serif;
+            outline: none; border-radius: 4px;
         }
-        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--electric-blue); box-shadow: 0 0 10px rgba(0, 238, 255, 0.2); }
+        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--electric-blue); }
         .insta-btn { display: inline-block; margin-top: 20px; padding: 15px 30px; border: 1px solid var(--electric-blue); color: var(--electric-blue); text-decoration: none; font-family: 'Syncopate', sans-serif; font-size: 0.7rem; transition: 0.3s; text-align: center; background: transparent; cursor: pointer; }
         .insta-btn:hover { background: var(--electric-blue); color: #000; box-shadow: 0 0 20px rgba(0, 238, 255, 0.4); }
+
+        /* VISITOR COUNTER STYLING */
+        .visitor-counter {
+            margin-top: 20px; font-family: 'Courier New', monospace; font-size: 0.6rem; color: #444; letter-spacing: 1px;
+        }
+        .visitor-counter span { color: var(--electric-blue); font-weight: bold; }
 
         /* TERMINAL UI */
         #terminal-launcher {
@@ -112,8 +140,8 @@
             font-family: 'Courier New', Courier, monospace; font-size: 0.8rem;
             box-shadow: 0 0 30px rgba(0, 0, 0, 1);
         }
-        #terminal-output { flex-grow: 1; overflow-y: auto; color: var(--electric-blue); margin-bottom: 10px; scrollbar-width: thin; }
-        #terminal-input { background: transparent; border: none; color: #fff; outline: none; width: 100%; font-family: inherit; }
+        #terminal-output { flex-grow: 1; overflow-y: auto; color: var(--electric-blue); margin-bottom: 10px; }
+        #terminal-input { background: transparent; border: none; color: #fff; outline: none; width: 100%; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         footer { text-align: center; padding: 60px 20px; font-size: 0.6rem; color: #444; letter-spacing: 2px; border-top: 1px solid var(--border-glass); line-height: 2; }
@@ -130,6 +158,7 @@
             <li><a href="#studio">EQUIPOS</a></li>
             <li><a href="#social">REDES</a></li>
             <li><a href="#contact" style="color: var(--electric-blue);">CONTRATE</a></li>
+            <li><button class="mode-switch" onclick="toggleStormMode()">STORM_MODE: OFF</button></li>
         </ul>
     </nav>
     
@@ -143,8 +172,8 @@
         <div class="glass-box">
             <p>A <strong>Storm of Destruction</strong> nasceu da urgência de trazer o peso de volta às garagens. Baseada em Campinas, a banda utiliza o "Bunker do Diogo" como laboratório para desconstruir o Heavy Rock.</p>
             <div class="noise-meter-container">
-                <div class="meter-label"><span>PROGRESSO: 1ª MÚSICA AUTORAL</span><span>20% COMPLETO</span></div>
-                <div class="meter-bar"><div class="meter-fill"></div></div>
+                <div class="meter-label"><span>PROGRESSO: 1ª MÚSICA AUTORAL</span><span id="meter-text">20% COMPLETO</span></div>
+                <div class="meter-bar"><div class="meter-fill" id="meter-fill"></div></div>
             </div>
         </div>
     </section>
@@ -155,17 +184,17 @@
             <div class="crew-card">
                 <span class="crew-role">VOZ & GUITARRA BASE</span>
                 <span class="crew-name">DANIEL</span>
-                <p class="crew-bio">A alma lírica. Combina vocais viscerais com a base sólida da Stratocaster, trazendo a identidade melódica para o caos.</p>
+                <p>Vocais viscerais e base sólida.</p>
             </div>
             <div class="crew-card">
                 <span class="crew-role">GUITARRA SOLO</span>
                 <span class="crew-name">DIOGO</span>
-                <p class="crew-bio">O mestre dos riffs. Com sua Flying V, Diogo é responsável pelas distorções cortantes e solos que definem o peso da Storm.</p>
+                <p>Mestre dos riffs e distorções cortantes.</p>
             </div>
             <div class="crew-card">
                 <span class="crew-role">BATERIA</span>
                 <span class="crew-name">ÍCARO</span>
-                <p class="crew-bio">O motor implacável. dita o ritmo da destruição, garantindo que cada batida seja um trovão no peito.</p>
+                <p>O motor implacável da destruição.</p>
             </div>
         </div>
     </section>
@@ -201,7 +230,7 @@
 
     <section id="social">
         <h2>Conexão Visceral</h2>
-        <div class="glass-box social-box">
+        <div class="glass-box social-box" style="text-align: center;">
             <a href="https://www.instagram.com/stormofdestructionband" target="_blank" class="insta-btn">FOLLOW US @stormofdestructionband</a>
         </div>
     </section>
@@ -210,9 +239,9 @@
         <h2>Summon the Storm</h2>
         <div class="glass-box">
             <form class="contact-form">
-                <input type="text" placeholder="NOME / PRODUTOR / CONTRATANTE" required>
+                <input type="text" placeholder="NOME / PRODUTOR" required>
                 <input type="email" placeholder="EMAIL DE CONTATO" required>
-                <textarea rows="4" placeholder="Descreva o evento ou a proposta para a banda..."></textarea>
+                <textarea rows="4" placeholder="Sua proposta..."></textarea>
                 <button type="submit" class="insta-btn">ENVIAR CHAMADO</button>
             </form>
         </div>
@@ -220,27 +249,28 @@
 
     <footer>
         STORM OF DESTRUCTION // 2026 // CAMPINAS - SP<br>
+        <div class="visitor-counter">BUNKER_ACCESS_COUNT: [<span id="count">000427</span>]</div>
         <span style="opacity: 0.5; font-size: 0.5rem;">DESENVOLVIDO POR ÍCARO GONÇALVES</span>
     </footer>
 
     <div id="terminal-launcher" onclick="toggleTerminal()">_></div>
     <div id="bunker-terminal">
         <div id="terminal-output">
-            <div>[STORM OS v1.0.3 - READY]</div>
+            <div>[STORM OS v1.0.4 - READY]</div>
             <div>Digite 'help' para comandos.</div>
         </div>
         <div style="display: flex;">
             <span style="color: var(--electric-blue); margin-right: 5px;">></span>
-            <input type="text" id="terminal-input" placeholder="" onkeydown="handleCommand(event)">
+            <input type="text" id="terminal-input" onkeydown="handleCommand(event)">
         </div>
     </div>
 
     <script>
     // Gerenciamento de Equipamentos
     const gearData = {
-        'drums': { title: 'BATERIA TROVÃO', owner: 'ÍCARO', desc: 'O motor implacável que dita o ritmo da destruição.', img: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=500' },
-        'flyingv': { title: 'JACKSON KING V JS32', owner: 'DIOGO', desc: 'Distorção e atitude pura. A arma para os solos cortantes.', img: 'flyingv.png' },
-        'strato': { title: 'STRATOCASTER', owner: 'DANIEL', desc: 'A base sólida dos riffs e a identidade melódica da Storm.', img: 'strato.png' }
+        'drums': { title: 'BATERIA TROVÃO', owner: 'ÍCARO', desc: 'Motor implacável da destruição.', img: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=500' },
+        'flyingv': { title: 'JACKSON KING V JS32', owner: 'DIOGO', desc: 'Arma escolhida para solos cortantes.', img: 'flyingv.png' },
+        'strato': { title: 'STRATOCASTER', owner: 'DANIEL', desc: 'Identidade melódica da Storm.', img: 'strato.png' }
     };
 
     function showGear(id) {
@@ -253,16 +283,29 @@
         display.style.display = 'grid';
     }
 
-    // Gerenciamento do Terminal
+    // STORM MODE (DARK MODE)
+    function toggleStormMode() {
+        document.body.classList.toggle('storm-mode');
+        const btn = document.querySelector('.mode-switch');
+        const isActive = document.body.classList.contains('storm-mode');
+        btn.innerText = isActive ? "STORM_MODE: ON" : "STORM_MODE: OFF";
+    }
+
+    // CONTADOR DE ACESSOS (SIMULADO)
+    let count = 427;
+    setInterval(() => {
+        if(Math.random() > 0.8) {
+            count++;
+            document.getElementById('count').innerText = count.toString().padStart(6, '0');
+        }
+    }, 3000);
+
+    // TERMINAL
     function toggleTerminal() {
         const t = document.getElementById('bunker-terminal');
         const input = document.getElementById('terminal-input');
-        if (t.style.display === 'flex') {
-            t.style.display = 'none';
-        } else {
-            t.style.display = 'flex';
-            input.focus();
-        }
+        t.style.display = (t.style.display === 'flex') ? 'none' : 'flex';
+        if(t.style.display === 'flex') input.focus();
     }
 
     function handleCommand(e) {
@@ -270,19 +313,15 @@
             const input = document.getElementById('terminal-input');
             const output = document.getElementById('terminal-output');
             const cmd = input.value.toLowerCase().trim();
-            
             let response = "";
-            if (cmd === 'help') response = "COMANDOS: status, members, location, clear, whoami";
-            else if (cmd === 'status') response = "AUTORAL: 20% | VOLUME: CRÍTICO | NOISE: HIGH";
-            else if (cmd === 'members') response = "DANIEL (VOX), DIOGO (LEAD), ICARO (DRUMS)";
-            else if (cmd === 'location') response = "BUNKER: CAMPINAS - SP (SECURE LOCATION)";
-            else if (cmd === 'whoami') response = "GUEST_USER_ACCESS_GRANTED";
-            else if (cmd === 'clear') { output.innerHTML = "<div>[SYSTEM CLEARED]</div>"; input.value = ""; return; }
-            else if (cmd === '') return;
-            else response = `Comando '${cmd}' não reconhecido pelo Bunker.`;
 
-            output.innerHTML += `<div><span style="color:#fff">> ${cmd}</span></div>`;
-            output.innerHTML += `<div>${response}</div>`;
+            if (cmd === 'help') response = "status, members, location, storm-on, clear";
+            else if (cmd === 'status') response = "MÚSICA: 20% | HUMIDITY: 85% | NOISE: HIGH";
+            else if (cmd === 'storm-on') { toggleStormMode(); response = "STORM_MODE_OVERRIDE_SUCCESS"; }
+            else if (cmd === 'clear') { output.innerHTML = ""; input.value = ""; return; }
+            else response = `Comando '${cmd}' inválido.`;
+
+            output.innerHTML += `<div><span style="color:#fff">> ${cmd}</span></div><div>${response}</div>`;
             output.scrollTop = output.scrollHeight;
             input.value = "";
         }
