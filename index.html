@@ -6,117 +6,29 @@
     <title>STORM OF DESTRUCTION | HEAVY ROCK</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;700&display=swap');
-
-        :root {
-            --bg-dark: #020202;
-            --accent: #ffffff;
-            --electric-blue: #00eeff;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border-glass: rgba(255, 255, 255, 0.1);
-        }
-
+        :root { --bg-dark: #020202; --accent: #ffffff; --electric-blue: #00eeff; --glass: rgba(255, 255, 255, 0.03); --border-glass: rgba(255, 255, 255, 0.1); }
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-
-        body {
-            background-color: var(--bg-dark);
-            color: #ccc;
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-        }
-
-        .thunder-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 0%, #111 0%, transparent 70%);
-            z-index: -1;
-        }
-
-        header {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-
+        body { background-color: var(--bg-dark); color: #ccc; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        .thunder-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 0%, #111 0%, transparent 70%); z-index: -1; }
+        header { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         .logo-container { max-width: 600px; width: 85%; animation: storm-entry 1.5s ease-out; }
         .logo-container img { width: 100%; filter: drop-shadow(0 0 20px rgba(255,255,255,0.2)); }
-
-        @keyframes storm-entry {
-            from { opacity: 0; transform: scale(0.9); filter: brightness(2); }
-            to { opacity: 1; transform: scale(1); filter: brightness(1); }
-        }
-
-        .motto {
-            font-family: 'Syncopate', sans-serif;
-            font-size: 0.8rem;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            color: var(--accent);
-            opacity: 0.7;
-            margin-top: 20px;
-        }
-
+        @keyframes storm-entry { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        .motto { font-family: 'Syncopate', sans-serif; font-size: 0.8rem; letter-spacing: 6px; text-transform: uppercase; color: var(--accent); opacity: 0.7; margin-top: 20px; }
         section { padding: 100px 20px; max-width: 1100px; margin: auto; }
-
-        h2 {
-            font-family: 'Syncopate', sans-serif;
-            font-size: 1.8rem;
-            margin-bottom: 50px;
-            text-align: center;
-            color: #fff;
-            letter-spacing: 8px;
-        }
-
-        .glass-box {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-glass);
-            padding: 40px;
-            line-height: 1.8;
-        }
-
-        .arsenal-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .arsenal-item {
-            padding: 15px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--border-glass);
-            text-align: center;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
+        h2 { font-family: 'Syncopate', sans-serif; font-size: 1.8rem; margin-bottom: 50px; text-align: center; color: #fff; letter-spacing: 8px; }
+        .glass-box { background: var(--glass); backdrop-filter: blur(10px); border: 1px solid var(--border-glass); padding: 40px; }
+        .arsenal-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-top: 30px; }
+        .arsenal-item { padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); text-align: center; font-size: 0.7rem; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
         .arsenal-item:hover { background: var(--electric-blue); color: #000; }
-
-        #gear-display {
-            margin-top: 40px;
-            display: none;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 30px;
-            align-items: center;
-            animation: fadeIn 0.8s ease;
-        }
-
+        #gear-display { margin-top: 40px; display: none; grid-template-columns: 1fr 1.5fr; gap: 30px; align-items: center; animation: fadeIn 0.8s ease; }
         .gear-img { width: 100%; border-radius: 4px; border: 1px solid var(--border-glass); }
-
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
         footer { text-align: center; padding: 60px; font-size: 0.7rem; color: #444; letter-spacing: 2px; }
     </style>
 </head>
 <body>
-
     <div class="thunder-bg"></div>
-
     <header>
         <div class="logo-container">
             <img src="logo.jpg" alt="Storm of Destruction Logo">
@@ -127,14 +39,11 @@
     <section id="studio">
         <h2>The HQ Basement</h2>
         <div class="glass-box">
-            <p style="text-align: center;">Clique nos equipamentos para ver quem comanda a tempestade:</p>
-            
             <div class="arsenal-list">
                 <div class="arsenal-item" onclick="showGear('drums')">Bateria (Ícaro)</div>
                 <div class="arsenal-item" onclick="showGear('flyingv')">Flying V (Diogo)</div>
                 <div class="arsenal-item" onclick="showGear('strato')">Strato (Daniel)</div>
             </div>
-
             <div id="gear-display">
                 <img id="gear-photo" src="" alt="Equipamento" class="gear-img">
                 <div>
@@ -146,28 +55,26 @@
         </div>
     </section>
 
-    <footer>
-        STORM OF DESTRUCTION // 2026 // HIGH SCHOOL ROCK PROJECT
-    </footer>
+    <footer>STORM OF DESTRUCTION // 2026</footer>
 
     <script>
         const gearData = {
             'drums': {
                 title: 'Bateria Trovão',
                 user: 'Operada por Ícaro',
-                desc: 'O motor rítmico brutal da Storm. Ícaro bota força em cada batida pro som explodir.',
+                desc: 'O motor rítmico brutal.',
                 img: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=500'
             },
             'flyingv': {
                 title: 'Gibson Flying V',
                 user: 'Operada por Diogo',
-                desc: 'A arma de solos do Diogo. Agressividade pura e visual matador no palco.',
-                img: 'flyingv.png' 
+                desc: 'Agressividade pura.',
+                img: 'voandov.png' 
             },
             'strato': {
                 title: 'Stratocaster',
                 user: 'Operada por Daniel',
-                desc: 'A base rítmica e os timbres reflexivos que o Daniel usa para preencher o som.',
+                desc: 'A fundação rítmica.',
                 img: 'strato.png'
             }
         };
