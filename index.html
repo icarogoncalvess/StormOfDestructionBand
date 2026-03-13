@@ -31,6 +31,7 @@
         nav a { text-decoration: none; color: #888; font-family: 'Syncopate', sans-serif; font-size: 0.55rem; letter-spacing: 2px; transition: 0.3s; }
         nav a:hover { color: var(--electric-blue); text-shadow: 0 0 10px var(--electric-blue); }
 
+        /* HEADER & LOGO */
         .thunder-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 0%, #111 0%, transparent 70%); z-index: -1; }
         header { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         
@@ -50,9 +51,9 @@
         .motto { font-family: 'Syncopate', sans-serif; font-size: 0.8rem; letter-spacing: 6px; text-transform: uppercase; color: var(--accent); opacity: 0.7; margin-top: 20px; animation: flicker 3s infinite; }
         @keyframes flicker { 0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 0.5; } 20%, 24%, 55% { opacity: 1; color: var(--electric-blue); } }
         
-        section { padding: 60px 20px; max-width: 1100px; margin: auto; }
+        /* SECTIONS */
+        section { padding: 80px 20px; max-width: 1100px; margin: auto; }
         h2 { font-family: 'Syncopate', sans-serif; font-size: 1.4rem; margin-bottom: 40px; text-align: center; color: #fff; letter-spacing: 8px; text-transform: uppercase; border-bottom: 1px solid var(--border-glass); padding-bottom: 20px; }
-        
         .glass-box { background: var(--glass); backdrop-filter: blur(10px); border: 1px solid var(--border-glass); padding: 40px; line-height: 1.8; margin-bottom: 30px; border-radius: 4px; }
         
         /* NOISE METER */
@@ -62,7 +63,7 @@
         .meter-fill { width: 20%; height: 100%; background: linear-gradient(90deg, var(--electric-blue), #fff); box-shadow: 0 0 15px var(--electric-blue); animation: pulse-bar 2s infinite; }
         @keyframes pulse-bar { 0% { opacity: 0.7; } 50% { opacity: 1; } 100% { opacity: 0.7; } }
 
-        /* THE CREW SECTION */
+        /* THE CREW */
         .crew-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
         .crew-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); padding: 30px; text-align: center; transition: 0.3s; }
         .crew-card:hover { border-color: var(--electric-blue); background: rgba(0, 238, 255, 0.05); }
@@ -70,19 +71,49 @@
         .crew-name { font-family: 'Syncopate'; font-size: 1.1rem; color: #fff; margin-bottom: 15px; display: block; }
         .crew-bio { font-size: 0.85rem; line-height: 1.6; color: #aaa; }
 
+        /* SETLIST & ARSENAL */
         .track { display: flex; justify-content: space-between; padding: 15px; border-bottom: 1px solid var(--border-glass); }
         .track-name { font-family: 'Syncopate', sans-serif; font-size: 0.75rem; color: #fff; }
-
         .arsenal-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
         .arsenal-item { padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); text-align: center; font-size: 0.7rem; cursor: pointer; transition: 0.2s; font-family: 'Syncopate'; }
         .arsenal-item:hover { background: var(--electric-blue); color: #000; transform: skewX(-10deg); }
-        
         #gear-display { margin-top: 30px; display: none; grid-template-columns: 1fr 1.5fr; gap: 30px; align-items: center; animation: fadeIn 0.5s; }
         .gear-img { width: 100%; border: 1px solid var(--border-glass); }
 
-        .social-box { text-align: center; padding: 40px; border: 1px dashed var(--border-glass); }
-        .insta-btn { display: inline-block; margin-top: 20px; padding: 15px 30px; border: 1px solid var(--electric-blue); color: var(--electric-blue); text-decoration: none; font-family: 'Syncopate', sans-serif; font-size: 0.7rem; transition: 0.3s; }
+        /* CONTACT FORM */
+        .contact-form { display: grid; gap: 15px; max-width: 600px; margin: 0 auto; }
+        .contact-form input, .contact-form textarea {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-glass);
+            padding: 15px;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            border-radius: 4px;
+        }
+        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--electric-blue); box-shadow: 0 0 10px rgba(0, 238, 255, 0.2); }
+        .insta-btn { display: inline-block; margin-top: 20px; padding: 15px 30px; border: 1px solid var(--electric-blue); color: var(--electric-blue); text-decoration: none; font-family: 'Syncopate', sans-serif; font-size: 0.7rem; transition: 0.3s; text-align: center; background: transparent; cursor: pointer; }
         .insta-btn:hover { background: var(--electric-blue); color: #000; box-shadow: 0 0 20px rgba(0, 238, 255, 0.4); }
+
+        /* TERMINAL UI */
+        #terminal-launcher {
+            position: fixed; bottom: 20px; right: 20px;
+            width: 50px; height: 50px; background: var(--bg-dark);
+            border: 1px solid var(--electric-blue); border-radius: 50%;
+            color: var(--electric-blue); display: flex; align-items: center;
+            justify-content: center; cursor: pointer; z-index: 2000;
+            box-shadow: 0 0 15px rgba(0, 238, 255, 0.3); font-family: monospace; font-weight: bold;
+        }
+        #bunker-terminal {
+            position: fixed; bottom: 80px; right: 20px;
+            width: 320px; height: 400px; background: rgba(2, 2, 2, 0.98);
+            border: 1px solid var(--electric-blue); z-index: 2000;
+            display: none; flex-direction: column; padding: 15px;
+            font-family: 'Courier New', Courier, monospace; font-size: 0.8rem;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 1);
+        }
+        #terminal-output { flex-grow: 1; overflow-y: auto; color: var(--electric-blue); margin-bottom: 10px; scrollbar-width: thin; }
+        #terminal-input { background: transparent; border: none; color: #fff; outline: none; width: 100%; font-family: inherit; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         footer { text-align: center; padding: 60px 20px; font-size: 0.6rem; color: #444; letter-spacing: 2px; border-top: 1px solid var(--border-glass); line-height: 2; }
@@ -98,6 +129,7 @@
             <li><a href="#setlist">SETLIST</a></li>
             <li><a href="#studio">EQUIPOS</a></li>
             <li><a href="#social">REDES</a></li>
+            <li><a href="#contact" style="color: var(--electric-blue);">CONTRATE</a></li>
         </ul>
     </nav>
     
@@ -109,7 +141,7 @@
     <section id="about">
         <h2>The Origin</h2>
         <div class="glass-box">
-            <p>A <strong>Storm of Destruction</strong> nasceu da urgência de trazer o peso de volta às garagens. Baseada em Campinas, a banda utiliza o "Bunker do Diogo" como laboratório para desconstruir o Heavy Rock e injetar doses de realidade urbana.</p>
+            <p>A <strong>Storm of Destruction</strong> nasceu da urgência de trazer o peso de volta às garagens. Baseada em Campinas, a banda utiliza o "Bunker do Diogo" como laboratório para desconstruir o Heavy Rock.</p>
             <div class="noise-meter-container">
                 <div class="meter-label"><span>PROGRESSO: 1ª MÚSICA AUTORAL</span><span>20% COMPLETO</span></div>
                 <div class="meter-bar"><div class="meter-fill"></div></div>
@@ -123,17 +155,17 @@
             <div class="crew-card">
                 <span class="crew-role">VOZ & GUITARRA BASE</span>
                 <span class="crew-name">DANIEL</span>
-                <p class="crew-bio">A alma lírica da banda. Daniel combina vocais viscerais com a base sólida da Stratocaster, trazendo a identidade melódica para o caos.</p>
+                <p class="crew-bio">A alma lírica. Combina vocais viscerais com a base sólida da Stratocaster, trazendo a identidade melódica para o caos.</p>
             </div>
             <div class="crew-card">
                 <span class="crew-role">GUITARRA SOLO</span>
                 <span class="crew-name">DIOGO</span>
-                <p class="crew-bio">O mestre dos riffs no Bunker. Com sua Flying V, Diogo é responsável pelas distorções cortantes e pelos solos que definem o peso da Storm.</p>
+                <p class="crew-bio">O mestre dos riffs. Com sua Flying V, Diogo é responsável pelas distorções cortantes e solos que definem o peso da Storm.</p>
             </div>
             <div class="crew-card">
                 <span class="crew-role">BATERIA</span>
                 <span class="crew-name">ÍCARO</span>
-                <p class="crew-bio">O motor implacável. Ícaro dita o ritmo da destruição, garantindo que cada batida seja um trovão no peito de quem ouve.</p>
+                <p class="crew-bio">O motor implacável. dita o ritmo da destruição, garantindo que cada batida seja um trovão no peito.</p>
             </div>
         </div>
     </section>
@@ -174,16 +206,41 @@
         </div>
     </section>
 
+    <section id="contact">
+        <h2>Summon the Storm</h2>
+        <div class="glass-box">
+            <form class="contact-form">
+                <input type="text" placeholder="NOME / PRODUTOR / CONTRATANTE" required>
+                <input type="email" placeholder="EMAIL DE CONTATO" required>
+                <textarea rows="4" placeholder="Descreva o evento ou a proposta para a banda..."></textarea>
+                <button type="submit" class="insta-btn">ENVIAR CHAMADO</button>
+            </form>
+        </div>
+    </section>
+
     <footer>
         STORM OF DESTRUCTION // 2026 // CAMPINAS - SP<br>
         <span style="opacity: 0.5; font-size: 0.5rem;">DESENVOLVIDO POR ÍCARO GONÇALVES</span>
     </footer>
 
+    <div id="terminal-launcher" onclick="toggleTerminal()">_></div>
+    <div id="bunker-terminal">
+        <div id="terminal-output">
+            <div>[STORM OS v1.0.3 - READY]</div>
+            <div>Digite 'help' para comandos.</div>
+        </div>
+        <div style="display: flex;">
+            <span style="color: var(--electric-blue); margin-right: 5px;">></span>
+            <input type="text" id="terminal-input" placeholder="" onkeydown="handleCommand(event)">
+        </div>
+    </div>
+
     <script>
+    // Gerenciamento de Equipamentos
     const gearData = {
-        'drums': { title: 'BATERIA TROVÃO', owner: 'ÍCARO', desc: 'O coração pulsante da Storm. Ícaro dita o ritmo implacável que não deixa ninguém parado.', img: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=500' },
-        'flyingv': { title: 'JACKSON KING V JS32', owner: 'DIOGO', desc: 'Distorção e atitude pura. A arma escolhida por Diogo para os solos mais cortantes da banda.', img: 'flyingv.png' },
-        'strato': { title: 'STRATOCASTER', owner: 'DANIEL', desc: 'A versatilidade das cordas. Daniel utiliza a Strato para transitar entre timbres limpos e o peso do rock.', img: 'strato.png' }
+        'drums': { title: 'BATERIA TROVÃO', owner: 'ÍCARO', desc: 'O motor implacável que dita o ritmo da destruição.', img: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=500' },
+        'flyingv': { title: 'JACKSON KING V JS32', owner: 'DIOGO', desc: 'Distorção e atitude pura. A arma para os solos cortantes.', img: 'flyingv.png' },
+        'strato': { title: 'STRATOCASTER', owner: 'DANIEL', desc: 'A base sólida dos riffs e a identidade melódica da Storm.', img: 'strato.png' }
     };
 
     function showGear(id) {
@@ -194,6 +251,41 @@
         document.getElementById('gear-owner').innerText = `OPERADO POR: ${data.owner}`;
         document.getElementById('gear-desc').innerText = data.desc;
         display.style.display = 'grid';
+    }
+
+    // Gerenciamento do Terminal
+    function toggleTerminal() {
+        const t = document.getElementById('bunker-terminal');
+        const input = document.getElementById('terminal-input');
+        if (t.style.display === 'flex') {
+            t.style.display = 'none';
+        } else {
+            t.style.display = 'flex';
+            input.focus();
+        }
+    }
+
+    function handleCommand(e) {
+        if (e.key === 'Enter') {
+            const input = document.getElementById('terminal-input');
+            const output = document.getElementById('terminal-output');
+            const cmd = input.value.toLowerCase().trim();
+            
+            let response = "";
+            if (cmd === 'help') response = "COMANDOS: status, members, location, clear, whoami";
+            else if (cmd === 'status') response = "AUTORAL: 20% | VOLUME: CRÍTICO | NOISE: HIGH";
+            else if (cmd === 'members') response = "DANIEL (VOX), DIOGO (LEAD), ICARO (DRUMS)";
+            else if (cmd === 'location') response = "BUNKER: CAMPINAS - SP (SECURE LOCATION)";
+            else if (cmd === 'whoami') response = "GUEST_USER_ACCESS_GRANTED";
+            else if (cmd === 'clear') { output.innerHTML = "<div>[SYSTEM CLEARED]</div>"; input.value = ""; return; }
+            else if (cmd === '') return;
+            else response = `Comando '${cmd}' não reconhecido pelo Bunker.`;
+
+            output.innerHTML += `<div><span style="color:#fff">> ${cmd}</span></div>`;
+            output.innerHTML += `<div>${response}</div>`;
+            output.scrollTop = output.scrollHeight;
+            input.value = "";
+        }
     }
     </script>
 </body>
