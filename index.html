@@ -170,10 +170,25 @@
 
     <script>
         const gearData = {
-            'drums': { title: 'BATERIA TROVÃO', desc: 'O motor que dita o ritmo da destruição.', img: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=500' },
-            'flyingv': { title: 'GIBSON FLYING V', desc: 'Ataque sonoro e solos cortantes.', img: 'voandov.png' },
-            'strato': { title: 'STRATOCASTER', desc: 'A base sólida e os timbres clássicos.', img: 'strato.png' }
-        };
+    'drums': { 
+        title: 'BATERIA TROVÃO', 
+        user: 'Ícaro', 
+        desc: 'O coração pulsante da Storm.', 
+        img: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=500' 
+    },
+    'flyingv': { 
+        title: 'GIBSON FLYING V', 
+        user: 'Diogo', 
+        desc: 'Distorção e atitude pura.', 
+        img: 'flyingv.png' // Nome atualizado conforme seu GitHub
+    },
+    'strato': { 
+        title: 'STRATOCASTER', 
+        user: 'Daniel', 
+        desc: 'A base sólida dos nossos riffs.', 
+        img: 'strato.png' 
+    }
+};
 
         function showGear(id) {
             const display = document.getElementById('gear-display');
