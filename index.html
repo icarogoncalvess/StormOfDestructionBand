@@ -3,439 +3,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STORM OF DESTRUCTION | HEAVY METAL</title>
+    <title>ADVOGADOS DO MUNDO | HEAVY ROCK</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;700&display=swap');
         
         :root { 
-            --bg-dark: #020202; 
+            --bg-dark: #050505; 
             --accent: #ffffff; 
-            --electric-blue: #00eeff; 
-            --glass: rgba(255, 255, 255, 0.03); 
-            --border-glass: rgba(255, 255, 255, 0.1); 
-            --storm-intensity: 0.1;
+            --gold: #d4af37; /* Cor do metal da logo */
+            --glass: rgba(255, 255, 255, 0.02); 
+            --border-glass: rgba(212, 175, 55, 0.1); 
+            --intensity: 0.1;
         }
 
-        body.storm-mode {
-            --electric-blue: #00ffaa;
-            --border-glass: rgba(0, 255, 170, 0.2);
-            --storm-intensity: 0.4;
+        body.veredito-mode {
+            --gold: #ffcc00;
+            --border-glass: rgba(212, 175, 55, 0.4);
+            --intensity: 0.5;
+            background-color: #0a0a0a;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body { background-color: var(--bg-dark); color: #ccc; font-family: 'Inter', sans-serif; overflow-x: hidden; transition: 0.5s ease; }
+        body { background-color: var(--bg-dark); color: #bbb; font-family: 'Inter', sans-serif; overflow-x: hidden; transition: 0.8s ease; }
 
-        /* RELÂMPAGO (FLASH) */
-        #lightning-flash {
+        /* FLASH DE JUSTIÇA */
+        #justice-flash {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: white; z-index: 9999; pointer-events: none; opacity: 0;
+            background: var(--gold); z-index: 9999; pointer-events: none; opacity: 0;
         }
         @keyframes flash-anim {
-            0% { opacity: 0; } 10% { opacity: 0.8; } 20% { opacity: 0; } 25% { opacity: 0.5; } 30% { opacity: 0; }
+            0% { opacity: 0; } 10% { opacity: 0.5; } 20% { opacity: 0; }
         }
 
-        /* ACHIEVEMENTS POPUP */
+        /* CONQUISTAS */
         #achievement-toast {
             position: fixed; top: 20px; right: -300px; width: 250px;
-            background: rgba(0, 0, 0, 0.9); border-left: 4px solid var(--electric-blue);
+            background: rgba(0, 0, 0, 0.95); border-left: 4px solid var(--gold);
             padding: 15px; color: white; z-index: 10000; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            font-family: 'Syncopate'; font-size: 0.55rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            font-family: 'Syncopate'; font-size: 0.55rem; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
         #achievement-toast.show { right: 20px; }
 
-        /* CANVAS CHUVA */
-        #storm-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; opacity: 0; transition: opacity 1s; }
-        body.storm-mode #storm-canvas { opacity: 1; }
+        /* CANVAS CHUVA DOURADA */
+        #gold-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; opacity: 0; transition: opacity 1s; }
+        body.veredito-mode #gold-canvas { opacity: 1; }
 
         /* NAVBAR */
         nav {
             position: fixed; top: 0; width: 100%; height: 70px;
-            background: rgba(2, 2, 2, 0.95); backdrop-filter: blur(15px);
+            background: rgba(2, 2, 2, 0.98); backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-glass); display: flex; justify-content: center; align-items: center; z-index: 1000;
         }
         nav ul { display: flex; list-style: none; gap: 20px; flex-wrap: wrap; justify-content: center; align-items: center; }
-        nav a { text-decoration: none; color: #888; font-family: 'Syncopate', sans-serif; font-size: 0.55rem; letter-spacing: 2px; transition: 0.3s; }
-        nav a:hover { color: var(--electric-blue); text-shadow: 0 0 10px var(--electric-blue); }
+        nav a { text-decoration: none; color: #666; font-family: 'Syncopate', sans-serif; font-size: 0.55rem; letter-spacing: 2px; transition: 0.3s; }
+        nav a:hover { color: var(--gold); text-shadow: 0 0 10px var(--gold); }
 
         .mode-switch {
-            background: transparent; border: 1px solid var(--electric-blue); color: var(--electric-blue);
+            background: transparent; border: 1px solid var(--gold); color: var(--gold);
             font-family: 'Syncopate'; font-size: 0.5rem; padding: 5px 10px; cursor: pointer; margin-left: 20px; transition: 0.3s;
         }
-        .mode-switch:hover { background: var(--electric-blue); color: #000; }
+        .mode-switch:hover { background: var(--gold); color: #000; }
 
         /* HEADER */
-        .thunder-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 0%, #111 0%, transparent 70%); z-index: -1; opacity: var(--storm-intensity); transition: 0.5s; }
+        .court-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 0%, #1a1a1a 0%, transparent 75%); z-index: -1; opacity: var(--intensity); transition: 1s; }
         header { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .logo-container { max-width: 600px; width: 85%; margin-bottom: 20px; position: relative; overflow: hidden; cursor: pointer; }
-        .logo-container img { width: 100%; filter: drop-shadow(0 0 20px rgba(255,255,255,0.1)); transition: 0.2s; }
-        .logo-container:hover img { animation: glitch-img 0.3s cubic-bezier(.25,.46,.45,.94) both infinite; filter: drop-shadow(0 0 30px var(--electric-blue)); }
+        .logo-container { max-width: 550px; width: 80%; margin-bottom: 20px; position: relative; cursor: pointer; }
+        .logo-container img { width: 100%; filter: drop-shadow(0 0 15px rgba(212,175,55,0.2)); transition: 0.5s; }
+        .logo-container:hover img { filter: drop-shadow(0 0 40px var(--gold)); transform: scale(1.02); }
 
-        @keyframes glitch-img { 0% { transform: translate(0); } 20% { transform: translate(-2px, 2px); } 40% { transform: translate(-2px, -2px); } 60% { transform: translate(2px, 2px); } 80% { transform: translate(2px, -2px); } 100% { transform: translate(0); } }
-        .motto { font-family: 'Syncopate', sans-serif; font-size: 0.8rem; letter-spacing: 6px; text-transform: uppercase; color: var(--accent); opacity: 0.7; margin-top: 20px; animation: flicker 3s infinite; }
-        @keyframes flicker { 0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 0.5; } 20%, 24%, 55% { opacity: 1; color: var(--electric-blue); } }
+        .motto { font-family: 'Syncopate', sans-serif; font-size: 0.75rem; letter-spacing: 5px; text-transform: uppercase; color: var(--accent); opacity: 0.8; margin-top: 30px; animation: glow 4s infinite; }
+        @keyframes glow { 0%, 100% { text-shadow: 0 0 5px transparent; } 50% { text-shadow: 0 0 15px var(--gold); color: #fff; } }
         
         /* SECTIONS */
-        section { padding: 80px 20px; max-width: 1100px; margin: auto; position: relative; z-index: 1; }
-        h2 { font-family: 'Syncopate', sans-serif; font-size: 1.4rem; margin-bottom: 40px; text-align: center; color: #fff; letter-spacing: 8px; text-transform: uppercase; border-bottom: 1px solid var(--border-glass); padding-bottom: 20px; }
-        .glass-box { background: var(--glass); backdrop-filter: blur(10px); border: 1px solid var(--border-glass); padding: 40px; line-height: 1.8; margin-bottom: 30px; border-radius: 4px; }
+        section { padding: 100px 20px; max-width: 1100px; margin: auto; position: relative; z-index: 1; }
+        h2 { font-family: 'Syncopate', sans-serif; font-size: 1.3rem; margin-bottom: 50px; text-align: center; color: #fff; letter-spacing: 10px; text-transform: uppercase; border-bottom: 1px solid var(--border-glass); padding-bottom: 25px; }
+        .glass-box { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border-glass); padding: 45px; line-height: 2; margin-bottom: 35px; border-radius: 2px; }
         
-        .noise-meter-container { margin-top: 20px; }
-        .meter-label { display: flex; justify-content: space-between; font-family: 'Syncopate'; font-size: 0.6rem; color: var(--electric-blue); margin-bottom: 8px; }
-        .meter-bar { width: 100%; height: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); border-radius: 20px; overflow: hidden; }
-        .meter-fill { width: 20%; height: 100%; background: linear-gradient(90deg, var(--electric-blue), #fff); box-shadow: 0 0 15px var(--electric-blue); animation: pulse-bar 2s infinite; }
-        @keyframes pulse-bar { 0% { opacity: 0.7; } 50% { opacity: 1; } 100% { opacity: 0.7; } }
+        /* BARRA DE PROGRESSO */
+        .noise-meter-container { margin-top: 30px; }
+        .meter-label { display: flex; justify-content: space-between; font-family: 'Syncopate'; font-size: 0.55rem; color: var(--gold); margin-bottom: 10px; }
+        .meter-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; }
+        .meter-fill { width: 35%; height: 100%; background: var(--gold); box-shadow: 0 0 20px var(--gold); }
 
-        .crew-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .crew-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); padding: 30px; text-align: center; transition: 0.3s; }
-        .crew-card:hover { border-color: var(--electric-blue); background: rgba(0, 238, 255, 0.05); }
-        .crew-role { font-family: 'Syncopate'; font-size: 0.6rem; color: var(--electric-blue); display: block; margin-bottom: 10px; letter-spacing: 2px; }
-        .crew-name { font-family: 'Syncopate'; font-size: 1.1rem; color: #fff; margin-bottom: 15px; display: block; }
+        /* CARDS DA CREW */
+        .crew-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .crew-card { background: rgba(255,255,255,0.01); border: 1px solid var(--border-glass); padding: 35px; text-align: center; transition: 0.4s; position: relative; }
+        .crew-card:hover { border-color: var(--gold); background: rgba(212, 175, 55, 0.05); transform: translateY(-5px); }
+        .crew-role { font-family: 'Syncopate'; font-size: 0.6rem; color: var(--gold); display: block; margin-bottom: 12px; letter-spacing: 3px; }
+        .crew-name { font-family: 'Syncopate'; font-size: 1.2rem; color: #fff; margin-bottom: 20px; display: block; }
 
-        .track { display: flex; justify-content: space-between; padding: 15px; border-bottom: 1px solid var(--border-glass); }
+        .track { display: flex; justify-content: space-between; padding: 20px; border-bottom: 1px solid var(--border-glass); transition: 0.2s; }
+        .track:hover { background: rgba(212, 175, 55, 0.05); }
         .track-name { font-family: 'Syncopate', sans-serif; font-size: 0.75rem; color: #fff; }
-        .arsenal-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
-        .arsenal-item { padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); text-align: center; font-size: 0.7rem; cursor: pointer; transition: 0.2s; font-family: 'Syncopate'; }
-        .arsenal-item:hover { background: var(--electric-blue); color: #000; transform: skewX(-10deg); }
-        #gear-display { margin-top: 30px; display: none; grid-template-columns: 1fr 1.5fr; gap: 30px; align-items: center; animation: fadeIn 0.5s; }
-        .gear-img { width: 100%; border: 1px solid var(--border-glass); }
 
-        .contact-form { display: grid; gap: 15px; max-width: 600px; margin: 0 auto; }
-        .contact-form input, .contact-form textarea { background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); padding: 15px; color: #fff; font-family: 'Inter', sans-serif; outline: none; border-radius: 4px; }
-        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--electric-blue); }
-        .insta-btn { display: inline-block; margin-top: 20px; padding: 15px 30px; border: 1px solid var(--electric-blue); color: var(--electric-blue); text-decoration: none; font-family: 'Syncopate', sans-serif; font-size: 0.7rem; transition: 0.3s; text-align: center; background: transparent; cursor: pointer; }
-        .insta-btn:hover { background: var(--electric-blue); color: #000; box-shadow: 0 0 20px rgba(0, 238, 255, 0.4); }
+        .insta-btn { display: inline-block; margin-top: 25px; padding: 18px 35px; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; font-family: 'Syncopate', sans-serif; font-size: 0.65rem; transition: 0.3s; text-align: center; background: transparent; cursor: pointer; letter-spacing: 2px; }
+        .insta-btn:hover { background: var(--gold); color: #000; box-shadow: 0 0 25px rgba(212, 175, 55, 0.4); }
 
-        .visitor-counter { margin-top: 20px; font-family: 'Courier New', monospace; font-size: 0.6rem; color: #444; letter-spacing: 1px; }
-        .visitor-counter span { color: var(--electric-blue); font-weight: bold; }
+        footer { text-align: center; padding: 80px 20px; font-size: 0.6rem; color: #555; letter-spacing: 3px; border-top: 1px solid var(--border-glass); line-height: 2.5; }
+        .visitor-counter { margin-top: 15px; font-family: monospace; color: var(--gold); opacity: 0.6; }
 
-        #terminal-launcher { position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background: var(--bg-dark); border: 1px solid var(--electric-blue); border-radius: 50%; color: var(--electric-blue); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; box-shadow: 0 0 15px rgba(0, 238, 255, 0.3); font-family: monospace; font-weight: bold; }
-        #bunker-terminal { position: fixed; bottom: 80px; right: 20px; width: 320px; height: 400px; background: rgba(2, 2, 2, 0.98); border: 1px solid var(--electric-blue); z-index: 2000; display: none; flex-direction: column; padding: 15px; font-family: 'Courier New', Courier, monospace; font-size: 0.8rem; box-shadow: 0 0 30px rgba(0, 0, 0, 1); }
-        #terminal-output { flex-grow: 1; overflow-y: auto; color: var(--electric-blue); margin-bottom: 10px; }
-        #terminal-input { background: transparent; border: none; color: #fff; outline: none; width: 100%; }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        footer { text-align: center; padding: 60px 20px; font-size: 0.6rem; color: #444; letter-spacing: 2px; border-top: 1px solid var(--border-glass); line-height: 2; }
+        #terminal-launcher { position: fixed; bottom: 25px; right: 25px; width: 55px; height: 55px; background: #000; border: 1px solid var(--gold); border-radius: 50%; color: var(--gold); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; font-family: monospace; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
     </style>
 </head>
 <body>
-    <div id="lightning-flash"></div>
+    <div id="justice-flash"></div>
     <div id="achievement-toast">
-        <span style="color: var(--electric-blue);">[CONQUISTA DESBLOQUEADA]</span><br>
+        <span style="color: var(--gold);">[CASO ENCERRADO]</span><br>
         <p id="achievement-name" style="margin-top:5px;"></p>
     </div>
 
-    <div id="storm-pedal-container" style="position: fixed; top: 100px; right: 20px; z-index: 9999; display: none; flex-direction: column; align-items: center; gap: 10px; background: rgba(0,0,0,0.9); padding: 15px; border: 1px solid var(--electric-blue); border-radius: 8px; font-family: 'Syncopate'; box-shadow: 0 10px 30px rgba(0,0,0,0.8);">
-        <div style="font-size: 0.5rem; color: #aaa; letter-spacing: 2px;">STORM DISTORTION</div>
-        <div style="display: flex; gap: 15px;">
+    <div id="gavel-pedal" style="position: fixed; top: 100px; right: 20px; z-index: 9999; display: none; flex-direction: column; align-items: center; gap: 10px; background: rgba(0,0,0,0.95); padding: 20px; border: 1px solid var(--gold); border-radius: 4px; font-family: 'Syncopate'; box-shadow: 0 10px 40px rgba(0,0,0,0.9);">
+        <div style="font-size: 0.45rem; color: #888; letter-spacing: 2px;">GAVEL DISTORTION v2.0</div>
+        <div style="display: flex; gap: 20px;">
             <div style="text-align: center;">
-                <label style="font-size: 0.4rem; color: var(--electric-blue); display: block; margin-bottom: 5px;">GAIN</label>
-                <input type="range" id="gain-knob" min="0" max="100" value="50" step="1" oninput="updateDistortion(this.value)" style="writing-mode: bt-lr; -webkit-appearance: slider-vertical; width: 12px; height: 70px; background: #222; cursor: ns-resize;">
+                <label style="font-size: 0.4rem; color: var(--gold); display: block; margin-bottom: 8px;">GUILTY</label>
+                <input type="range" id="gain-knob" min="0" max="100" value="70" step="1" oninput="updateDist(this.value)" style="writing-mode: bt-lr; -webkit-appearance: slider-vertical; width: 14px; height: 80px; background: #111; cursor: pointer;">
             </div>
             <div style="text-align: center;">
-                <label style="font-size: 0.4rem; color: var(--electric-blue); display: block; margin-bottom: 5px;">VOL</label>
-                <input type="range" id="volume-knob" min="0" max="100" value="70" step="1" oninput="updateVolume(this.value)" style="writing-mode: bt-lr; -webkit-appearance: slider-vertical; width: 12px; height: 70px; background: #222; cursor: ns-resize;">
+                <label style="font-size: 0.4rem; color: var(--gold); display: block; margin-bottom: 8px;">VERDICT</label>
+                <input type="range" id="vol-knob" min="0" max="100" value="80" step="1" style="writing-mode: bt-lr; -webkit-appearance: slider-vertical; width: 14px; height: 80px; background: #111; cursor: pointer;">
             </div>
         </div>
-        <div id="pedal-status" style="font-size: 0.45rem; color: #666; margin-top:5px;">DRIVE: 50%</div>
+        <div id="pedal-status" style="font-size: 0.45rem; color: var(--gold); margin-top:10px;">SENTENÇA: 70%</div>
     </div>
 
-    <div class="thunder-bg"></div>
-    <canvas id="storm-canvas"></canvas>
+    <div class="court-bg"></div>
+    <canvas id="gold-canvas"></canvas>
 
     <nav>
         <ul>
-            <li><a href="#about">ORIGIN</a></li>
-            <li><a href="#history">COMO SURGIU</a></li>
-            <li><a href="#crew">THE CREW</a></li>
-            <li><a href="#setlist">SETLIST</a></li>
-            <li><a href="#studio">EQUIPOS</a></li>
-            <li><a href="#social">REDES</a></li>
-            <li><a href="#contact" style="color: var(--electric-blue);">CONTRATE</a></li>
-            <li><button class="mode-switch" onclick="toggleStormMode()">STORM_MODE: OFF</button></li>
+            <li><a href="#about">A BANCA</a></li>
+            <li><a href="#history">O PROCESSO</a></li>
+            <li><a href="#crew">ADVOGADOS</a></li>
+            <li><a href="#setlist">AUDIÊNCIA</a></li>
+            <li><a href="#contact" style="color: var(--gold);">INTIMAÇÃO</a></li>
+            <li><button class="mode-switch" onclick="toggleVeredito()">VEREDITO: OFF</button></li>
         </ul>
     </nav>
     
     <header>
-        <div class="logo-container"><img src="logo.jpg" alt="Storm of Destruction Logo"></div>
-        <div class="motto">Even in the storm, the light still shines</div>
+        <div class="logo-container">
+            <img src="logo_advogados.png" alt="Advogados Do Mundo Logo">
+        </div>
+        <div class="motto">Nossa lei é o riff. Nossa sentença é o som.</div>
     </header>
 
     <section id="about">
-        <h2>The Origin</h2>
+        <h2>A Banca</h2>
         <div class="glass-box">
-            <p>A <strong>Storm of Destruction</strong> nasceu da urgência de trazer o peso de volta às garagens. Situada em Campinas, a banda utiliza o "Bunker do Diogo" como laboratório para desconstruir o Heavy Rock.</p>
+            <p>Os <strong>Advogados Do Mundo</strong> não defendem causas perdidas, eles as transformam em som pesado. Operando diretamente de Campinas, a banca utiliza frequências graves e distorções viscerais para dar o veredito final em cada palco que pisa.</p>
             <div class="noise-meter-container">
-                <div class="meter-label"><span>PROGRESSO: 1ª MÚSICA AUTORAL</span><span id="meter-text">20% COMPLETO</span></div>
-                <div class="meter-bar"><div class="meter-fill" id="meter-fill"></div></div>
+                <div class="meter-label"><span>PROCESSO CRIATIVO</span><span id="meter-text">35% CONCLUÍDO</span></div>
+                <div class="meter-bar"><div class="meter-fill"></div></div>
             </div>
         </div>
     </section>
 
     <section id="history">
-        <h2>Como Surgiu</h2>
+        <h2>O Processo</h2>
         <div class="glass-box">
-            <p>A Storm of Destruction não começou em um estúdio profissional, mas sim nos corredores da escola, entre conversas sobre riffs de guitarra e o desejo de tocar algo que realmente tivesse peso. O que uniu Daniel, Diogo e Ícaro foi justamente essa afinidade rara: três amigos que não se satisfaziam com o comum e queriam trazer de volta a energia crua do Heavy Metal. Entre erros e acertos no Bunker, percebemos que a nossa química ia muito além da amizade; havia uma tempestade sonora ali querendo sair. Foi assim que nasceu a Storm, como o resultado de três caras que decidiram transformar o barulho da garagem em algo visceral.</p>
+            <p>O que antes era apenas uma tempestade de destruição, evoluiu. Daniel, Diogo e Ícaro perceberam que o rock precisava de uma ordem diferente — uma ordem imposta pelo peso. Assim nasceu a transição para <strong>Advogados Do Mundo</strong>. No Bunker, as leis da física são desafiadas por riffs que servem como provas incontestáveis de que o Heavy Rock ainda dita as regras. Não somos apenas uma banda; somos o conselho tutelar do barulho.</p>
         </div>
     </section>
 
     <section id="crew">
-        <h2>The Crew</h2>
+        <h2>Os Advogados</h2>
         <div class="crew-grid">
             <div class="crew-card">
-                <span class="crew-role">VOZ / BAIXO</span>
+                <span class="crew-role">A VOZ DA LEI / BAIXO</span>
                 <span class="crew-name">DANIEL</span>
-                <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 15px; font-family: monospace; font-size: 0.6rem; text-align: left; color: #aaa; border-top: 1px solid #333; padding-top: 10px;">
-                    <div>[ CLASSE: BARD (DOOM) ]</div>
-                    <div>[ LÍRICA: 100/100 ] <span style="color:var(--electric-blue);">████████</span></div>
-                    <div>[ ESTAMINA: MAX ] <span style="color:#ff4444;">██████████</span></div>
-                    <div>[ TÉCNICA: 75/100 ] <span style="color:var(--electric-blue);">███████░░░</span></div>
-                    <p style="margin-top: 10px; font-family: 'Inter'; font-size: 0.7rem;">Vocais viscerais e base sólida que sustenta a parede sonora.</p>
-                </div>
+                <p style="font-size: 0.7rem; color: #888;">Especialista em frequências que estremecem o tribunal.</p>
             </div>
             <div class="crew-card">
-                <span class="crew-role">GUITARRA SOLO</span>
+                <span class="crew-role">PROMOTOR DE RIFFS</span>
                 <span class="crew-name">DIOGO</span>
-                <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 15px; font-family: monospace; font-size: 0.6rem; text-align: left; color: #aaa; border-top: 1px solid #333; padding-top: 10px;">
-                    <div>[ CLASSE: WIZARD (RIFFS) ]</div>
-                    <div>[ DESTRUIÇÃO: MAX ] <span style="color:#ff4444;">█████████</span></div>
-                    <div>[ VELOCIDADE: 95/100 ] <span style="color:var(--electric-blue);">████████░░</span></div>
-                    <div>[ TÉCNICA: 90/100 ] <span style="color:var(--electric-blue);">██████████</span></div>
-                    <p style="margin-top: 10px; font-family: 'Inter'; font-size: 0.7rem;">Mestre dos riffs magistrais e distorções cortantes da Storm.</p>
-                </div>
+                <p style="font-size: 0.7rem; color: #888;">Apresentando provas cortantes através de solos magistrais.</p>
             </div>
             <div class="crew-card">
-                <span class="crew-role">BATERIA</span>
+                <span class="crew-role">EXECUÇÃO / BATERIA</span>
                 <span class="crew-name">ÍCARO</span>
-                <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 15px; font-family: monospace; font-size: 0.6rem; text-align: left; color: #aaa; border-top: 1px solid #333; padding-top: 10px;">
-                    <div>[ CLASSE: BARBARIAN (DRUMS) ]</div>
-                    <div>[ PODER: 100/100 ] <span style="color:#00ffaa;">██████████</span></div>
-                    <div>[ CAFEÍNA: MAX] <span style="color:#ff4444;">██████████</span></div>
-                    <div>[ PROGRAMAÇÃO: 80/100 ] <span style="color:var(--electric-blue);">████████░░</span></div>
-                    <p style="margin-top: 10px; font-family: 'Inter'; font-size: 0.7rem;">O motor implacável. Ícaro dita o ritmo da destruição.</p>
-                </div>
+                <p style="font-size: 0.7rem; color: #888;">O martelo final. A cadência que dita o julgamento.</p>
             </div>
         </div>
     </section>
 
     <section id="setlist">
-        <h2>Setlist de Guerra</h2>
+        <h2>Setlist de Audiência</h2>
         <div class="glass-box">
-            <div class="track"><span class="track-name">01. Smells Like Teen Spirit</span><span style="color:var(--electric-blue); font-size:0.7rem;">NIRVANA</span></div>
-            <div class="track"><span class="track-name">02. Notion (Rock Version)</span><span style="color:var(--electric-blue); font-size:0.7rem;">THE RARE OCCASIONS</span></div>
-            <div class="track"><span class="track-name">03. 333</span><span style="color:var(--electric-blue); font-size:0.7rem;">MATUÊ (HEAVY)</span></div>
-            <div class="track"><span class="track-name">04. Enter Sandman</span><span style="color:var(--electric-blue); font-size:0.7rem;">METALLICA</span></div>
-        </div>
-    </section>
-
-    <section id="studio">
-        <h2>The HQ Basement</h2>
-        <div class="glass-box">
-            <div class="arsenal-list">
-                <div class="arsenal-item" onclick="showGear('drums')">BATERIA</div>
-                <div class="arsenal-item" onclick="showGear('flyingv')">FLYING V</div>
-                <div class="arsenal-item" onclick="showGear('strato')">STRATO</div>
-            </div>
-            <div id="gear-display">
-                <img id="gear-photo" src="" alt="Equipamento" class="gear-img">
-                <div>
-                    <h3 id="gear-title" style="color: #fff; font-family: 'Syncopate'; margin-bottom: 5px;"></h3>
-                    <span id="gear-owner" style="color: var(--electric-blue); font-family: 'Syncopate'; font-size: 0.6rem; display: block; margin-bottom: 10px;"></span>
-                    <p id="gear-desc"></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="social">
-        <h2>Conexão Visceral</h2>
-        <div class="glass-box social-box" style="text-align: center;">
-            <a href="https://www.instagram.com/stormofdestructionband" target="_blank" class="insta-btn">FOLLOW US @stormofdestructionband</a>
+            <div class="track"><span class="track-name">01. Smells Like Teen Spirit</span><span style="color:var(--gold); font-size:0.7rem;">NIRVANA</span></div>
+            <div class="track"><span class="track-name">02. Enter Sandman</span><span style="color:var(--gold); font-size:0.7rem;">METALLICA</span></div>
+            <div class="track"><span class="track-name">03. 333 (Heavy Verdict)</span><span style="color:var(--gold); font-size:0.7rem;">MATUÊ</span></div>
         </div>
     </section>
 
     <section id="contact">
-        <h2>Summon the Storm</h2>
+        <h2>Envie sua Intimação</h2>
         <div class="glass-box">
-            <form class="contact-form">
-                <input type="text" placeholder="NOME / PRODUTOR" required>
-                <input type="email" placeholder="EMAIL DE CONTATO" required>
-                <textarea rows="4" placeholder="Sua proposta..."></textarea>
-                <button type="submit" class="insta-btn">ENVIAR CHAMADO</button>
+            <form style="display: grid; gap: 15px;">
+                <input type="text" placeholder="SEU NOME" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); padding: 15px; color: #fff; outline: none;">
+                <textarea rows="4" placeholder="DESCRIÇÃO DO CASO (PROPOSTA)" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-glass); padding: 15px; color: #fff; outline: none;"></textarea>
+                <button type="submit" class="insta-btn">PROTOCOLO DE CONTRATAÇÃO</button>
             </form>
         </div>
     </section>
 
     <footer>
-        STORM OF DESTRUCTION // 2026 // CAMPINAS - SP<br>
-        <div class="visitor-counter">BUNKER_ACCESS_COUNT: [<span id="count">000427</span>]</div>
-        <span style="opacity: 0.5; font-size: 0.5rem;">DESENVOLVIDO POR ÍCARO GONÇALVES</span>
+        ADVOGADOS DO MUNDO // DESDE 11/03/2026 // CAMPINAS - SP<br>
+        <div class="visitor-counter">COURT_ACCESS_LOG: 000512</div>
+        <span style="opacity: 0.3; font-size: 0.5rem;">CÓDIGO POR ÍCARO GONÇALVES</span>
     </footer>
 
-    <div id="terminal-launcher" onclick="toggleTerminal()">_></div>
-    <div id="bunker-terminal">
-        <div id="terminal-output">
-            <div>[STORM OS v1.0.4 - READY]</div>
-            <div>Digite 'help' para comandos.</div>
-        </div>
-        <div style="display: flex;">
-            <span style="color: var(--electric-blue); margin-right: 5px;">></span>
-            <input type="text" id="terminal-input" onkeydown="handleCommand(event)">
-        </div>
-    </div>
+    <div id="terminal-launcher" onclick="alert('BUNKER TERMINAL: ACESSO RESTRITO AOS ADVOGADOS')">_></div>
 
     <script>
-    const canvas = document.getElementById('storm-canvas');
-    const ctx = canvas.getContext('2d');
-    let drops = [];
-    let achievements = { storm: false, terminal: false, gear: false };
-    
-    // Áudio Context
-    let audioCtx, distortionNode, gainNode, biquadFilter;
+        const canvas = document.getElementById('gold-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
 
-    function initAudioSystem() {
-        if (audioCtx) return;
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        distortionNode = audioCtx.createWaveShaper();
-        gainNode = audioCtx.createGain();
-        biquadFilter = audioCtx.createBiquadFilter();
-        biquadFilter.type = "lowpass";
-        biquadFilter.frequency.setValueAtTime(3000, audioCtx.currentTime);
-        distortionNode.connect(biquadFilter);
-        biquadFilter.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-        updateDistortion(document.getElementById('gain-knob').value);
-        updateVolume(document.getElementById('volume-knob').value);
-    }
-
-    function makeDistortionCurve(amount) {
-        let k = amount, n_samples = 44100, curve = new Float32Array(n_samples), deg = Math.PI / 180, i = 0, x;
-        for ( ; i < n_samples; ++i ) {
-            x = i * 2 / n_samples - 1;
-            curve[i] = ( 3 + k ) * x * 20 * deg / ( Math.PI + k * Math.abs(x) );
+        function initGoldRain() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            for (let i = 0; i < 80; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    speed: Math.random() * 5 + 2,
+                    size: Math.random() * 2
+                });
+            }
         }
-        return curve;
-    }
 
-    function updateDistortion(value) {
-        if (!distortionNode) return;
-        distortionNode.curve = makeDistortionCurve(value * 4);
-        document.getElementById('pedal-status').innerText = `DRIVE: ${value}%`;
-        document.getElementById('pedal-status').style.color = `rgb(${value*2.55}, 255, ${255 - value*2.55})`;
-    }
-
-    function updateVolume(value) {
-        if (gainNode) gainNode.gain.setValueAtTime(value / 100, audioCtx.currentTime);
-    }
-
-    function playDistortedThunder() {
-        if (!audioCtx) initAudioSystem();
-        const bufferSize = audioCtx.sampleRate * 1.5;
-        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-        const data = buffer.getChannelData(0);
-        for (let i = 0; i < bufferSize; i++) { data[i] = Math.random() * 2 - 1; }
-        const noiseSource = audioCtx.createBufferSource();
-        noiseSource.buffer = buffer;
-        noiseSource.connect(distortionNode);
-        noiseSource.start();
-        noiseSource.stop(audioCtx.currentTime + 1.5);
-    }
-
-    function unlockAchievement(id, name) {
-        if (achievements[id]) return;
-        achievements[id] = true;
-        const toast = document.getElementById('achievement-toast');
-        document.getElementById('achievement-name').innerText = name;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 4000);
-    }
-
-    function initRain() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        drops = [];
-        for (let i = 0; i < 100; i++) {
-            drops.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, len: Math.random() * 20 + 10, speed: Math.random() * 10 + 5 });
+        function drawGold() {
+            if (!document.body.classList.contains('veredito-mode')) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'rgba(212, 175, 55, 0.4)';
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+                p.y += p.speed;
+                if (p.y > canvas.height) p.y = -10;
+            });
+            requestAnimationFrame(drawGold);
         }
-    }
 
-    function drawRain() {
-        if (!document.body.classList.contains('storm-mode')) return;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.strokeStyle = 'rgba(0, 255, 170, 0.3)';
-        ctx.lineWidth = 1;
-        drops.forEach(d => {
-            ctx.beginPath(); ctx.moveTo(d.x, d.y); ctx.lineTo(d.x, d.y + d.len); ctx.stroke();
-            d.y += d.speed; if (d.y > canvas.height) d.y = -20;
-        });
-        requestAnimationFrame(drawRain);
-    }
+        function toggleVeredito() {
+            const active = document.body.classList.toggle('veredito-mode');
+            const btn = document.querySelector('.mode-switch');
+            const pedal = document.getElementById('gavel-pedal');
+            const flash = document.getElementById('justice-flash');
+            
+            btn.innerText = active ? "VEREDITO: ON" : "VEREDITO: OFF";
+            pedal.style.display = active ? 'flex' : 'none';
 
-    function toggleStormMode() {
-        const isActive = document.body.classList.toggle('storm-mode');
-        const btn = document.querySelector('.mode-switch');
-        const pedal = document.getElementById('storm-pedal-container');
-        btn.innerText = isActive ? "STORM_MODE: ON" : "STORM_MODE: OFF";
-        
-        if (isActive) {
-            initAudioSystem();
-            if (audioCtx) audioCtx.resume();
-            pedal.style.display = 'flex';
-            const flash = document.getElementById('lightning-flash');
-            flash.style.animation = 'flash-anim 0.4s ease-out';
-            setTimeout(() => flash.style.animation = '', 500);
-            playDistortedThunder();
-            unlockAchievement('storm', 'SOBREVIVENTE DA TEMPESTADE ⛈️');
-            initRain();
-            drawRain();
-        } else {
-            pedal.style.display = 'none';
+            if (active) {
+                flash.style.animation = 'flash-anim 0.3s ease-out';
+                setTimeout(() => flash.style.animation = '', 400);
+                initGoldRain();
+                drawGold();
+                showToast("ORDEM NO TRIBUNAL! 🏛️");
+            }
         }
-    }
 
-    const gearData = {
-        'drums': { title: 'BATERIA TROVÃO', owner: 'ÍCARO', desc: 'Motor implacável da destruição.', img: 'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=500' },
-        'flyingv': { title: 'JACKSON KING V JS32', owner: 'DIOGO', desc: 'Arma escolhida para solos cortantes.', img: 'flyingv.png' },
-        'strato': { title: 'STRATOCASTER', owner: 'DANIEL', desc: 'Identidade melódica da Storm.', img: 'strato.png' }
-    };
-
-    function showGear(id) {
-        unlockAchievement('gear', 'AUDITOR DE EQUIPAMENTO 🎸');
-        const display = document.getElementById('gear-display');
-        const data = gearData[id];
-        document.getElementById('gear-photo').src = data.img;
-        document.getElementById('gear-title').innerText = data.title;
-        document.getElementById('gear-owner').innerText = `OPERADO POR: ${data.owner}`;
-        document.getElementById('gear-desc').innerText = data.desc;
-        display.style.display = 'grid';
-    }
-
-    function toggleTerminal() {
-        unlockAchievement('terminal', 'HACKER DO BUNKER 💻');
-        const t = document.getElementById('bunker-terminal');
-        t.style.display = (t.style.display === 'flex') ? 'none' : 'flex';
-        if(t.style.display === 'flex') document.getElementById('terminal-input').focus();
-    }
-
-    function handleCommand(e) {
-        if (e.key === 'Enter') {
-            const input = document.getElementById('terminal-input');
-            const output = document.getElementById('terminal-output');
-            const cmd = input.value.toLowerCase().trim();
-            let resp = "";
-            if (cmd === 'help') resp = "status, members, storm-on, clear";
-            else if (cmd === 'status') resp = "MÚSICA: 20% | NOISE: CRITICAL";
-            else if (cmd === 'storm-on') { toggleStormMode(); resp = "SYSTEM_OVERRIDE_SUCCESS"; }
-            else if (cmd === 'clear') { output.innerHTML = ""; input.value = ""; return; }
-            else resp = `CMD '${cmd}' NOT FOUND.`;
-            output.innerHTML += `<div><span style="color:#fff">> ${cmd}</span></div><div>${resp}</div>`;
-            output.scrollTop = output.scrollHeight;
-            input.value = "";
+        function showToast(msg) {
+            const toast = document.getElementById('achievement-toast');
+            document.getElementById('achievement-name').innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
         }
-    }
 
-    let visitorCount = 427;
-    setInterval(() => { if(Math.random() > 0.8) { visitorCount++; document.getElementById('count').innerText = visitorCount.toString().padStart(6, '0'); } }, 3000);
-    window.onresize = initRain;
+        function updateDist(val) {
+            document.getElementById('pedal-status').innerText = `SENTENÇA: ${val}%`;
+        }
+
+        window.onresize = initGoldRain;
     </script>
 </body>
 </html>
