@@ -10,15 +10,15 @@
         :root { 
             --bg-dark: #050505; 
             --accent: #ffffff; 
-            --gold: #d4af37; /* Cor do metal da logo */
+            --silver: #C0C0C0; /* Cor prateada do metal da logo */
             --glass: rgba(255, 255, 255, 0.02); 
-            --border-glass: rgba(212, 175, 55, 0.1); 
+            --border-glass: rgba(192, 192, 192, 0.1); 
             --intensity: 0.1;
         }
 
         body.veredito-mode {
-            --gold: #ffcc00;
-            --border-glass: rgba(212, 175, 55, 0.4);
+            --silver: #E0E0E0;
+            --border-glass: rgba(192, 192, 192, 0.4);
             --intensity: 0.5;
             background-color: #0a0a0a;
         }
@@ -26,10 +26,10 @@
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         body { background-color: var(--bg-dark); color: #bbb; font-family: 'Inter', sans-serif; overflow-x: hidden; transition: 0.8s ease; }
 
-        /* FLASH DE JUSTIÇA */
+        /* FLASH DE JUSTIÇA PRATEADO */
         #justice-flash {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--gold); z-index: 9999; pointer-events: none; opacity: 0;
+            background: var(--silver); z-index: 9999; pointer-events: none; opacity: 0;
         }
         @keyframes flash-anim {
             0% { opacity: 0; } 10% { opacity: 0.5; } 20% { opacity: 0; }
@@ -38,15 +38,15 @@
         /* CONQUISTAS */
         #achievement-toast {
             position: fixed; top: 20px; right: -300px; width: 250px;
-            background: rgba(0, 0, 0, 0.95); border-left: 4px solid var(--gold);
+            background: rgba(0, 0, 0, 0.95); border-left: 4px solid var(--silver);
             padding: 15px; color: white; z-index: 10000; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             font-family: 'Syncopate'; font-size: 0.55rem; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
         #achievement-toast.show { right: 20px; }
 
-        /* CANVAS CHUVA DOURADA */
-        #gold-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; opacity: 0; transition: opacity 1s; }
-        body.veredito-mode #gold-canvas { opacity: 1; }
+        /* CANVAS CHUVA PRATEADA */
+        #silver-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; opacity: 0; transition: opacity 1s; }
+        body.veredito-mode #silver-canvas { opacity: 1; }
 
         /* NAVBAR */
         nav {
@@ -56,79 +56,84 @@
         }
         nav ul { display: flex; list-style: none; gap: 20px; flex-wrap: wrap; justify-content: center; align-items: center; }
         nav a { text-decoration: none; color: #666; font-family: 'Syncopate', sans-serif; font-size: 0.55rem; letter-spacing: 2px; transition: 0.3s; }
-        nav a:hover { color: var(--gold); text-shadow: 0 0 10px var(--gold); }
+        nav a:hover { color: var(--silver); text-shadow: 0 0 10px var(--silver); }
 
         .mode-switch {
-            background: transparent; border: 1px solid var(--gold); color: var(--gold);
+            background: transparent; border: 1px solid var(--silver); color: var(--silver);
             font-family: 'Syncopate'; font-size: 0.5rem; padding: 5px 10px; cursor: pointer; margin-left: 20px; transition: 0.3s;
         }
-        .mode-switch:hover { background: var(--gold); color: #000; }
+        .mode-switch:hover { background: var(--silver); color: #000; }
 
         /* HEADER */
         .court-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 0%, #1a1a1a 0%, transparent 75%); z-index: -1; opacity: var(--intensity); transition: 1s; }
         header { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         .logo-container { max-width: 550px; width: 80%; margin-bottom: 20px; position: relative; cursor: pointer; }
-        .logo-container img { width: 100%; filter: drop-shadow(0 0 15px rgba(212,175,55,0.2)); transition: 0.5s; }
-        .logo-container:hover img { filter: drop-shadow(0 0 40px var(--gold)); transform: scale(1.02); }
+        .logo-container img { width: 100%; filter: drop-shadow(0 0 15px rgba(192,192,192,0.2)); transition: 0.5s; }
+        .logo-container:hover img { filter: drop-shadow(0 0 40px var(--silver)); transform: scale(1.02); }
 
         .motto { font-family: 'Syncopate', sans-serif; font-size: 0.75rem; letter-spacing: 5px; text-transform: uppercase; color: var(--accent); opacity: 0.8; margin-top: 30px; animation: glow 4s infinite; }
-        @keyframes glow { 0%, 100% { text-shadow: 0 0 5px transparent; } 50% { text-shadow: 0 0 15px var(--gold); color: #fff; } }
+        @keyframes glow { 0%, 100% { text-shadow: 0 0 5px transparent; } 50% { text-shadow: 0 0 15px var(--silver); color: #fff; } }
         
         /* SECTIONS */
         section { padding: 100px 20px; max-width: 1100px; margin: auto; position: relative; z-index: 1; }
         h2 { font-family: 'Syncopate', sans-serif; font-size: 1.3rem; margin-bottom: 50px; text-align: center; color: #fff; letter-spacing: 10px; text-transform: uppercase; border-bottom: 1px solid var(--border-glass); padding-bottom: 25px; }
         .glass-box { background: var(--glass); backdrop-filter: blur(15px); border: 1px solid var(--border-glass); padding: 45px; line-height: 2; margin-bottom: 35px; border-radius: 2px; }
         
-        /* BARRA DE PROGRESSO */
+        /* BARRA DE PROGRESSO PRATEADA */
         .noise-meter-container { margin-top: 30px; }
-        .meter-label { display: flex; justify-content: space-between; font-family: 'Syncopate'; font-size: 0.55rem; color: var(--gold); margin-bottom: 10px; }
+        .meter-label { display: flex; justify-content: space-between; font-family: 'Syncopate'; font-size: 0.55rem; color: var(--silver); margin-bottom: 10px; }
         .meter-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; }
-        .meter-fill { width: 35%; height: 100%; background: var(--gold); box-shadow: 0 0 20px var(--gold); }
+        .meter-fill { width: 35%; height: 100%; background: var(--silver); box-shadow: 0 0 20px var(--silver); }
 
         /* CARDS DA CREW */
         .crew-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
         .crew-card { background: rgba(255,255,255,0.01); border: 1px solid var(--border-glass); padding: 35px; text-align: center; transition: 0.4s; position: relative; }
-        .crew-card:hover { border-color: var(--gold); background: rgba(212, 175, 55, 0.05); transform: translateY(-5px); }
-        .crew-role { font-family: 'Syncopate'; font-size: 0.6rem; color: var(--gold); display: block; margin-bottom: 12px; letter-spacing: 3px; }
-        .crew-name { font-family: 'Syncopate'; font-size: 1.2rem; color: #fff; margin-bottom: 20px; display: block; }
+        .crew-card:hover { border-color: var(--silver); background: rgba(192, 192, 192, 0.05); transform: translateY(-5px); }
+        .crew-role { font-family: 'Syncopate'; font-size: 0.6rem; color: var(--silver); display: block; margin-bottom: 12px; letter-spacing: 3px; }
+        .crew-name { font-family: 'Syncopate'; font-size: 1.2rem; color: #fff; margin-bottom: 20px; display: block; cursor: pointer; transition: 0.3s; }
+        .crew-name:hover { color: var(--silver); text-shadow: 0 0 10px var(--silver); }
+
+        /* INSTRUMENTO EXIBIDO */
+        #instrument-display { margin-top: 20px; display: none; text-align: center; }
+        #instrument-photo { max-width: 150px; border: 1px solid var(--border-glass); box-shadow: 0 0 15px rgba(192, 192, 192, 0.2); }
 
         .track { display: flex; justify-content: space-between; padding: 20px; border-bottom: 1px solid var(--border-glass); transition: 0.2s; }
-        .track:hover { background: rgba(212, 175, 55, 0.05); }
+        .track:hover { background: rgba(192, 192, 192, 0.05); }
         .track-name { font-family: 'Syncopate', sans-serif; font-size: 0.75rem; color: #fff; }
 
-        .insta-btn { display: inline-block; margin-top: 25px; padding: 18px 35px; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; font-family: 'Syncopate', sans-serif; font-size: 0.65rem; transition: 0.3s; text-align: center; background: transparent; cursor: pointer; letter-spacing: 2px; }
-        .insta-btn:hover { background: var(--gold); color: #000; box-shadow: 0 0 25px rgba(212, 175, 55, 0.4); }
+        .insta-btn { display: inline-block; margin-top: 25px; padding: 18px 35px; border: 1px solid var(--silver); color: var(--silver); text-decoration: none; font-family: 'Syncopate', sans-serif; font-size: 0.65rem; transition: 0.3s; text-align: center; background: transparent; cursor: pointer; letter-spacing: 2px; }
+        .insta-btn:hover { background: var(--silver); color: #000; box-shadow: 0 0 25px rgba(192, 192, 192, 0.4); }
 
         footer { text-align: center; padding: 80px 20px; font-size: 0.6rem; color: #555; letter-spacing: 3px; border-top: 1px solid var(--border-glass); line-height: 2.5; }
-        .visitor-counter { margin-top: 15px; font-family: monospace; color: var(--gold); opacity: 0.6; }
+        .visitor-counter { margin-top: 15px; font-family: monospace; color: var(--silver); opacity: 0.6; }
 
-        #terminal-launcher { position: fixed; bottom: 25px; right: 25px; width: 55px; height: 55px; background: #000; border: 1px solid var(--gold); border-radius: 50%; color: var(--gold); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; font-family: monospace; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
+        #terminal-launcher { position: fixed; bottom: 25px; right: 25px; width: 55px; height: 55px; background: #000; border: 1px solid var(--silver); border-radius: 50%; color: var(--silver); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; font-family: monospace; box-shadow: 0 0 15px rgba(192, 192, 192, 0.2); }
     </style>
 </head>
 <body>
     <div id="justice-flash"></div>
     <div id="achievement-toast">
-        <span style="color: var(--gold);">[CASO ENCERRADO]</span><br>
+        <span style="color: var(--silver);">[CASO ENCERRADO]</span><br>
         <p id="achievement-name" style="margin-top:5px;"></p>
     </div>
 
-    <div id="gavel-pedal" style="position: fixed; top: 100px; right: 20px; z-index: 9999; display: none; flex-direction: column; align-items: center; gap: 10px; background: rgba(0,0,0,0.95); padding: 20px; border: 1px solid var(--gold); border-radius: 4px; font-family: 'Syncopate'; box-shadow: 0 10px 40px rgba(0,0,0,0.9);">
+    <div id="gavel-pedal" style="position: fixed; top: 100px; right: 20px; z-index: 9999; display: none; flex-direction: column; align-items: center; gap: 10px; background: rgba(0,0,0,0.95); padding: 20px; border: 1px solid var(--silver); border-radius: 4px; font-family: 'Syncopate'; box-shadow: 0 10px 40px rgba(0,0,0,0.9);">
         <div style="font-size: 0.45rem; color: #888; letter-spacing: 2px;">GAVEL DISTORTION v2.0</div>
         <div style="display: flex; gap: 20px;">
             <div style="text-align: center;">
-                <label style="font-size: 0.4rem; color: var(--gold); display: block; margin-bottom: 8px;">GUILTY</label>
+                <label style="font-size: 0.4rem; color: var(--silver); display: block; margin-bottom: 8px;">GUILTY</label>
                 <input type="range" id="gain-knob" min="0" max="100" value="70" step="1" oninput="updateDist(this.value)" style="writing-mode: bt-lr; -webkit-appearance: slider-vertical; width: 14px; height: 80px; background: #111; cursor: pointer;">
             </div>
             <div style="text-align: center;">
-                <label style="font-size: 0.4rem; color: var(--gold); display: block; margin-bottom: 8px;">VERDICT</label>
+                <label style="font-size: 0.4rem; color: var(--silver); display: block; margin-bottom: 8px;">VERDICT</label>
                 <input type="range" id="vol-knob" min="0" max="100" value="80" step="1" style="writing-mode: bt-lr; -webkit-appearance: slider-vertical; width: 14px; height: 80px; background: #111; cursor: pointer;">
             </div>
         </div>
-        <div id="pedal-status" style="font-size: 0.45rem; color: var(--gold); margin-top:10px;">SENTENÇA: 70%</div>
+        <div id="pedal-status" style="font-size: 0.45rem; color: var(--silver); margin-top:10px;">SENTENÇA: 70%</div>
     </div>
 
     <div class="court-bg"></div>
-    <canvas id="gold-canvas"></canvas>
+    <canvas id="silver-canvas"></canvas>
 
     <nav>
         <ul>
@@ -136,14 +141,14 @@
             <li><a href="#history">O PROCESSO</a></li>
             <li><a href="#crew">ADVOGADOS</a></li>
             <li><a href="#setlist">AUDIÊNCIA</a></li>
-            <li><a href="#contact" style="color: var(--gold);">INTIMAÇÃO</a></li>
+            <li><a href="#contact" style="color: var(--silver);">INTIMAÇÃO</a></li>
             <li><button class="mode-switch" onclick="toggleVeredito()">VEREDITO: OFF</button></li>
         </ul>
     </nav>
     
     <header>
         <div class="logo-container">
-            <img src="logo_advogados.png" alt="Advogados Do Mundo Logo">
+            <img src="logo_completo.png" alt="Advogados Do Mundo Logo Completo" id="band-logo-main">
         </div>
         <div class="motto">Nossa lei é o riff. Nossa sentença é o som.</div>
     </header>
@@ -171,27 +176,31 @@
         <div class="crew-grid">
             <div class="crew-card">
                 <span class="crew-role">A VOZ DA LEI / BAIXO</span>
-                <span class="crew-name">DANIEL</span>
+                <span class="crew-name" onclick="showInstrument('bass')">DANIEL</span>
                 <p style="font-size: 0.7rem; color: #888;">Especialista em frequências que estremecem o tribunal.</p>
             </div>
             <div class="crew-card">
                 <span class="crew-role">PROMOTOR DE RIFFS</span>
-                <span class="crew-name">DIOGO</span>
+                <span class="crew-name" onclick="showInstrument('guitar')">DIOGO</span>
                 <p style="font-size: 0.7rem; color: #888;">Apresentando provas cortantes através de solos magistrais.</p>
             </div>
             <div class="crew-card">
                 <span class="crew-role">EXECUÇÃO / BATERIA</span>
-                <span class="crew-name">ÍCARO</span>
+                <span class="crew-name" onclick="showInstrument('drums')">ÍCARO</span>
                 <p style="font-size: 0.7rem; color: #888;">O martelo final. A cadência que dita o julgamento.</p>
             </div>
+        </div>
+        <div id="instrument-display" class="glass-box">
+            <h3 style="color: var(--silver); font-family: 'Syncopate'; font-size: 0.8rem; margin-bottom: 15px;">INSTRUMENTO DO ADVOGADO</h3>
+            <img id="instrument-photo" src="" alt="Foto do Instrumento">
         </div>
     </section>
 
     <section id="setlist">
         <h2>Setlist de Audiência</h2>
         <div class="glass-box">
-            <div class="track"><span class="track-name">01. Smells Like Teen Spirit</span><span style="color:var(--gold); font-size:0.7rem;">NIRVANA</span></div>
-            <div class="track"><span class="track-name">02. Enter Sandman</span><span style="color:var(--gold); font-size:0.7rem;">METALLICA</span></div>
+            <div class="track"><span class="track-name">01. Smells Like Teen Spirit</span><span style="color:var(--silver); font-size:0.7rem;">NIRVANA</span></div>
+            <div class="track"><span class="track-name">02. Enter Sandman</span><span style="color:var(--silver); font-size:0.7rem;">METALLICA</span></div>
             <div class="track"><span class="track-name">03. 333 (Heavy Verdict)</span><span style="color:var(--gold); font-size:0.7rem;">MATUÊ</span></div>
         </div>
     </section>
@@ -216,11 +225,33 @@
     <div id="terminal-launcher" onclick="alert('BUNKER TERMINAL: ACESSO RESTRITO AOS ADVOGADOS')">_></div>
 
     <script>
-        const canvas = document.getElementById('gold-canvas');
+        const canvas = document.getElementById('silver-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
 
-        function initGoldRain() {
+        // DADOS DOS INSTRUMENTOS
+        const instrumentData = {
+            'bass': 'bass.png', // Substitua pelos nomes reais dos seus arquivos
+            'guitar': 'guitar.png',
+            'drums': 'drums.png'
+        };
+
+        function showInstrument(type) {
+            const display = document.getElementById('instrument-display');
+            const photo = document.getElementById('instrument-photo');
+            
+            // Define a imagem com base no instrumento clicado
+            photo.src = instrumentData[type];
+            photo.alt = `Instrumento de ${type}`;
+            
+            // Exibe o contêiner
+            display.style.display = 'block';
+            
+            // Role a página para a área do instrumento
+            display.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function initSilverRain() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             particles = [];
@@ -234,10 +265,10 @@
             }
         }
 
-        function drawGold() {
+        function drawSilver() {
             if (!document.body.classList.contains('veredito-mode')) return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = 'rgba(212, 175, 55, 0.4)';
+            ctx.fillStyle = 'rgba(192, 192, 192, 0.4)';
             particles.forEach(p => {
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
@@ -245,7 +276,7 @@
                 p.y += p.speed;
                 if (p.y > canvas.height) p.y = -10;
             });
-            requestAnimationFrame(drawGold);
+            requestAnimationFrame(drawSilver);
         }
 
         function toggleVeredito() {
@@ -260,8 +291,8 @@
             if (active) {
                 flash.style.animation = 'flash-anim 0.3s ease-out';
                 setTimeout(() => flash.style.animation = '', 400);
-                initGoldRain();
-                drawGold();
+                initSilverRain();
+                drawSilver();
                 showToast("ORDEM NO TRIBUNAL! 🏛️");
             }
         }
@@ -277,7 +308,7 @@
             document.getElementById('pedal-status').innerText = `SENTENÇA: ${val}%`;
         }
 
-        window.onresize = initGoldRain;
+        window.onresize = initSilverRain;
     </script>
 </body>
 </html>
